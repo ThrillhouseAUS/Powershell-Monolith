@@ -1,0 +1,26 @@
+##            Finds domain PC's the user is logged into from a script updated by NS1SRAP19                    ##
+
+
+
+[void][System.Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic') 
+$myinput = [Microsoft.VisualBasic.Interaction]::InputBox("Enter an username", "Get PC's", "") 
+
+Import-CSV '\\ns1srap19\apps$\Asset recovery\Computers.csv'|?{$_.UserHandle -match $myinput}
+
+
+
+
+
+
+
+
+
+$userObjectID = <Get-AzureADUser -ObjectId "harry.goodwin@api.net.au" | select objectid> | Out-String
+echo $userObjectID
+$searchExpression = 'Get-AzureADUserRegisteredDevice -ObjectId' + $userObjectID + ''
+echo $searchExpression
+Invoke-Expression $searchExpression
+
+
+Connect-AzureAD
+Get-AzureADDevice -All 1 -Filter "startswith(DeviceOSType,'Windows')" | select displayname, approximateLastLogonTimeStamp, primaryUser    # | export-csv -path 'path' -NoTypeInformation
