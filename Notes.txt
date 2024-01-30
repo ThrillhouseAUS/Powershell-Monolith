@@ -1,0 +1,813 @@
+Desktop Support Notes 
+Australian Pharmasutical Industries
+
+============
+Reception con notes 
+============
+service desk notes 1300 88 7765
+
+============
+INC0397043
+Caity Sherlock 
+Caity called as she is in the office and is having Internet issues, cannot verify connection on outlook. 
+10.200.21.169
+LPF0W619R
+API local 2 unauthenticated when trying via the Ethernet cable. Started happening when she first came into the office after lunch.
+Word desk is G17. She is using wifi at the moment
+- Check Phsyical connection 
+- check my own laptop
+- check domain join
+- check outlook profile 
+- ping myself 
+- other printers
+dnscmd /clearcache
+Clear-DnsServerCache
+============
+1808 audio ddriver
+============
+Need to do, sim card and stock take with register 
+do the same for desktop accessories (cables)
+============
+2.056 - port 19
+2.058 - port 24
+2.059 - port 20
+============
+Jackie TPM chip, clear TPM and re enroll into autopilot 
+============
+grandmoff
+Tarkin1
+Ace Beta Charlie
+============
+rm williams williams board room camberwell
+============
+for new users add them to the intune users group in ad 
+
+============
+CMD sync time 
+open control panel as admin 
+============
+Company portal
+============
+Intune_Uac
+============
+da_hgoodwin@api.onmicrosoft.com
+access needed is 
+application admin 
+cloud device admin  
+intune admin 
+desktop analytics admin 
+user admin admin 
+teams service admin 
+help desk admin 
+service support admin 
+device admin admin 
+============
+Remote connection viewer
+
+============
+assett, deliver and install, inc
+============
+Jabra direct 
+============
+intune win10 ie trusted sites for whitelists
+============
+Create a recovery task for praveen 
+
+============
+dpc and lpc = domain 
+api = intune 
+just a serial number then intune needs auto pilot enrollment 
+============
+Win 10 machine upgrades
+Need a master spreadsheet sort by win version 
+============
+REoccuring meeting 
+============
+T069089382053
+============
+device admin group for quick assist remote login 
+============
+linda.elliot@api.net.au
+Cameron Palmer
+
+============
+4ppL32198
+============
+https://web.lumiagm.com/389242047
+
+============
+set home age on chrome to the connect page
+============
+give to Jenny Ackland 30149
+============
+1800 634 560
+============
+Dell Comman update on Tracies PC
+============
+Install vignette first and then config file
+============
+manhatten wms on wiki
+============
+Other team member just remapped and worked fine 
+went into office yesterday 
+vpn on 
+dell device da_hgoodwin
+============
+No response list for the last 60 days of device returns:
+Gabby Tully - Device is being transferred to a new starter, need device info and potentially a return.
+Sean Balme - Unable to locate the assets or their names, manager (Candice Godfrey) has stated that they were brought back to IT 
+
+============
+Talk to the SAP team SAP Basis 
+Ajith is the go to guy 
+============
+Kiosk to Guy Buyers - ops manager (in cupboard) Melbourne Distribution center asperlane email taha,guy and kora
+============
+tes@stategrowth.tas.gov.au
+
+
+============
+Control panel - configurations - actions - force the install/ SCCM Check
+============
+monitoring - hardware
+============
+3AF43C783243
+Mindy Zou
+
+
+============
+Sanjay 
+kk
+Taha's desk 
+dp to mdp cable 
+============
+caligan the great 
+============
+start writing new tickets for seperate INC's 
+
+aim to get tickets down for future proofing 
+============
+10407013
+============
+Get-WMIObject -class Win32_UserProfile | Where {(!$.Special) -and ($.ConvertToDateTime($_.LastUseTime) -lt (Get-Date).AddDays(-49))} | Remove-WmiObject
+============
+0413022132
+============
+desktop-7etbou8
+============
+8+- Delay on video switch 
+
+Chat with Julia about exact 
+
+Guest users in intune 
+
+Choose invite user 
+============
+Julia Duthil Discussion
+
+Breakout rooms Y/N? N 
+
+IT abilities of users beg - int - adv? Beg 
+
+Can we get her to moderate chat Good to go
+
+Dress rehearsal date Monday 01/03/21 1pm 
+
+Teams meeting or broadcast Broadcast 
+
+Darryl Behrendorff kicking off presentation
+
+no delegates 
+
+Darryl wants none of them to see each other
+
+ 
+
+
+============
+level 5 head right past ladies 
+============
+Liz Barlow 
+
+
+============
+autopilot brendans pc with my creds 
+============
+Only SAP 7.40 for winshuttle 
+============
+
+============
+BFlight Details of device:
+
+APIJ3RQCB3
+J3RQCB3
+Latitude 7210 2-in-1
+
+API9NYMP73
+9NYMP73
+Latitude 7210 2-in-1
+
+
+
+
+============
+3pl warehouse office 
+============
+0479093109
+============
+livewell room lvl 4 
+============
+Liz Barlow 
+
+Hayden Currie Can hear buzz on the other end 
+
+Bradley Calleja test device
+
+Tory Pottinger 
+
+
+============
+API_Mobile m0b1l3WiFi3ncrYpt! 
+============
+Pilot OU for all test machines whilst doing group policy 
+============
+4-43 
+============
+- Added Jacqui to Intune_api_users
+- Double check machine in autopilot
+- When laptop arrives, deliver hardware
+- Assure correct setup
+- Update asset register
+============
+affinity 
+timetex
+pay roll 
+============
+New-PSDrive -Name Z -PSProvider FileSystem -Root \\ns1srap19\source$ -Description "Apps Directory" -Scope Global -Credential (Get-Credential $user) -Persist
+============
+0400007174
+============
+m0b1l3WiFi3ncrYpt!
+============
+Add-LocalGroupMember -Group Administrators -Member username
+============
+Taha is out for the 15th to the 29th 
+
+============
+sfmyw35qjc6c - Lisa Anderton phone ID
+============
+app market easy for ipad 
+
+online db 
+
+opening the app certificate 
+
+Certific of this server invalid 
+Renee will be in 
+p660s001@priceline.com.au
+============
+Call ching and get the switch on the same VLAN as the initiative room 
+
+============
+DESKTOP-o8pcgld
+============
+goriachandni@gmail.com
+============  
+Intune Muppets Getting to hte office:
+
+
+============
+sap 
+jabber 
+agent 
+skype
+shared drive 
+idm find 
+
+============
+./Device/Vendor/MSFT/Policy/Config/Chrome~Policy~googlechrome~Startup/ShowHomeButton
+============
+APIPC04ZDT2 rmeove taneal night asset reg 
+
+============
+Worked 18 weeks 
+
+average weekly 1318
+average weekly tax 272
+total pre tax earings at BC 23724
+total tax at BC = 4896
+
+Total pre tax at api 20202
+assumed cont = 1290*6 = 7740
+total tax at api = 6821
+
+assumed cont tax for rest of 2020 FY = 454 * 6 = 2724
+
+
+total pre tax earnings 2020 FY 
+20202 + 7740 + 23724 = 51666
+
+Total tax paid 2020 FY = 6821 + 4896 + 2724 = 14441
+phone bill ~= 120 p/m 
+work day is 33% of total day 
+120* (1/3) = 40 
+40*10 months = $400
+$300 in office furnature
+
+power = 300 p/q 
+work day = 1/3 
+1/3 * 300 = 100 
+Power usage claims are $200
+
+Extras total = $900 
+
+
+Total tax return = 
+900 in extra
+s
+6374 return on income 
+700 depreciating asset returns from previous years 
+
+Finalised total = $8000
+
+
+============
+hcifwe
+wihtwwt
+============
+office 
+teams 
+chrome 
+============
+Get-ADUser -identity username -properties *
+set-addomain api.local
+Get-ADDomainController -Discover -Service ADWS
+============
+angela and dachi for dell respinse 
+============
+We don't maintain macros 
+============
+ - Laptop + Accessories (Arrival ETA) - New User? Y/N
+============
+Make D & I doco for new deices including new device setup
+public desktop 
+============
+Supervisor issue
+============
+d and i 
+Hardware asses 
+recover IT 
+============
+John Franson - RITM051631
+Hayden Currie
+Andrew Ragu 
+Craig Vaughn 
+Liz Barlow - Maybe issue doesnt occur at home
+
+============
+To check office version 
+
+============
+Kosta Ouskov loan device - can be domain 
+richard Kesley- domain joined 
+============
+0416836847 - Global concepts for KVM switch 
+============
+For Adobe Acrobat DC SEC zone 708 error 
+
+Open elevated regedt32go to HKLM\Software\Policies\Microsoft\Windows\CurrentVersion\Internet Settings
+change Security_HKLM_only DWORD from 1 to 0execute the installchange it back or gpupdate. 
+Here's the getadmx page for the key in question:https://admx.help/?Category=Windows_10_2016&Policy=Microsoft.Policies.InternetExplorer::Security_HKLM_only
+============
+To resolve this issue, you will need to delete the PendingFileRenameOperations registry value:
+
+    Open the Windows Registry Editor: ...
+    Navigate to HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager.
+    Right-click the PendingFileRenameOperations value and select Delete from the context menu. ...
+    Close Registry Editor.
+============
+
+94E70BDEC6BF
+
+94E70BDEC6BE 
+============
+Daniel Mirratory 
+Malena Reed is manager 
+============
+340286403e13
+============
+Phone that needs to be copied - 64d814A5E1E3 
+Phone to copy to - 10BD18DDB9B0
+============
+Request freshworks to auto assign the device to users 
+
+============
+PF-17KHJP
+============
+- Stock take on LTE devices 
+- Gauge demand and priority for new surfaces and email Taha DONE
+- Chrome force update DONE
+- Cisco ISE change to mac not required 
+
+============
+Find out how to auto tick radial buttons on installer
+============
+Canon ts5160
+============
+armaforce bisuticals lifespace doublestreanth probiotic
+============
+magnesium, zinc, vitamin d and fishoil tablets 
+============
+has to be specified installer 
+for example if it's install sheild 
+install shield unnatended install 
+
+============
+Sophie Pearce 
+for microstrategy and winshuttle 
+============
+New laptop email flesh out 
+============
+Manually elevate a user on a device
+
+In addition to using the Azure AD join process, you can also manually elevate a regular user to become a local administrator on one specific device. This step requires you to already be a member of the local administrators group.
+
+Starting with the Windows 10 1709 release, you can perform this task from Settings -> Accounts -> Other users. Select Add a work or school user, enter the user's UPN under User account and select Administrator under Account type
+
+Additionally, you can also add users using the command prompt:
+
+    If your tenant users are synchronized from on-premises Active Directory, use net localgroup administrators /add "Contoso\username".
+    If your tenant users are created in Azure AD, use `net localgroup administrators /add "AzureAD\UserUpn"`
+
+============
+Finish laptops
+update deliver and installs 
+
+============
+New Loser List:
+
+Sara Fuimaono - 05/07/2021
+Sara Fuimaono - 21/06/2021
+Alice Birnie - 21/06/21
+Rupesh Chudasama - 03/05/21 (loan hardware provided)
+Erica Ryan - 21/06/21 
+Divya Vinesh - 21/06/21
+Sara Fuimaono - 21/06/2021
+
+============
+N0vaG0d1na!
+============
+Travis - Mobile send - Sent 
+service desk pc - Loading 
+Laptop bag throw out (behind Wills old desk)
+Lucy's machine - RITM0052550 
+Elga's machine - done by will 
+Upload documentation - ToDo
+Contact Daniel - ToDo
+Contact Natacha - ToDo
+
+============
+5-35 for Sinha's kit done 
+Head Via desk 5-82 done 
+Ajith's laptop done
+Get hte 27 Inch shared dock 
+
+============
+Update snow with PO's
+New device including new starter info
+============
+N0vaG0d1na!
+============
+32718  32696
+============
+m0b1l3WiFi3ncrYpt!
+============
+RITM00528420
+RITM0052455
+Contact Matt about 27 inch done 
+
+
+
+Deliver Today:
+take keyboard down for delivery Julie Ahrene
+
+Request ETA:
+RITM0052988
+RITM0052028
+RITM0053057
+
+
+Unknown followup:
+RITM0052978
+
+
+============
+WMS
+SAP 
+Teams 
+TimTeq
+Microstrategy 
+
+============
+HIKVision Chrome support
+============
+32 Office and microstrategy
+============
+PMendo installed software:
+Webex 
+Diligent Boards
+Chrome
+SAP
+Skype
+
+============
+Warehouse project 
+tpm2 need to be on network cable
+intune kiosk - config 
+tpm2
+make all the choices 
+pin to mind 
+============
+ToDo:
+Self Deploy Profile [X]
+
+Intune Kiosk Settings []
+
+Test On Surface []
+
+Test on device with site []
+
+Run a kiosk box []
+
+============
+\\ns3-srp-prn01
+============
+Fresh service updates 
+
+============
+macro does a self copy 
+places in ./ 
+creates a vb script file in ./ 
+
+
+Potential security permissions 
+file evoke is the issue 
+new line created it the executed file
+============
+custom deployment profile to pick up tag on autopilot device then add tag to group 
+============
+RITM0053672
+
+
+
+============
+new security baseline - exclude user from current and see 
+certified and signed macros - In intune? 
+============
+32738 - Deployed, user does not exist yet 
+32363 - Deployed, not in use by user yet (With Manager)
+32160 - Device Status unknown no record of F68TL63 in service now 
+PC04ZDU2 - George Galanos device need to locate for IT new starter 
+FZL3FB3 - IT Spare still in stock 
+TABLET-MJLHP0U0 - Not enrolled by a user yet but registered in intune as has been setup 
+5H8BQ73 - No Data (marked in stock)
+SF2002 - Test Device 
+354RDB3 - IT Spare (Unknown Status)
+TABLET-4I9G9BJO - See Previous tablet device 
+9MVFP73 - IT Spare (in Cupboard)
+Delete1 - No Status no info surface pro 7+
+044766110653 - Pharmacy BD Spare 
+016974111453 - User has not started yet (Device with us currently)
+TABLET-0SBAE4O7 - See previous tablet 
+002759510353 - PharmacyBD spare 
+016735611453 - User starts in over a month 
+4N73FB3 - IT spare being prepped for use 
+
+============
+Rolling Stock Take Docks: 
+32715
+32692
+32719
+32721
+32718
+32720
+32717
+32731
+32213
+32737
+32729
+32732
+32695
+32353
+32714
+32724
+32360
+32723
+32733
+32734
+32352
+32215
+32713
+32351
+32355
+32693
+
+// count 26 in stock 4 (Outgoing)
+total in FW == 32 (2 Need to be assigned) changed two earlier these will have been assigned to S Gueverra and Eitehr K Trance, Y Eckheardt or one other
+
+
+============
+Sunila Wicks account issues 
+============
+Contact Mikaela Calder 
+- find out machine 
+- add to intune 
+- 
+============
+Added to Intune_API_Users.
+Change password on first login is OFF.
+Device Setup docs sent 
+Update FreshService with Asset info/allocation.
+Copy asset info to RITM (serials/asset tags).
+If shipping include device model, serial and asset tags in the email to recipients.
+Check enrollment has completed after user receives device. 
+============
+Daily Checks:
+Meetings rooms (Call self on teams)
+Assess Hardware requests
+Employee Exits
+============
+WIN 10 64 bit office hitlist 
+============
+Damien Wong <Damien.Wong@api.net.au> - Office 64bit
+Shenali Black <Shenali.Black@api.net.au> using MicroStrategy - Test with 64Bit MS and EPM addins - Office 64Bit
+Luciana Arolfo <Luciana.Arolfo@api.net.au> - Done 
+Anna Wong <Anna.Wong@api.net.au> - Is using Winshuttle (Addin?) Test with EPM 64Bit - No Intune
+Johnathon Cusmano <Johnathon.Cusmano@api.net.au> - Office 64Bit
+Olivia Xavier <Olivia.Xavier@api.net.au> - Done 		
+Raina Singh <Raina.Singh@api.net.au>
+============
+Sam Craddock
+============
+RITM0053582 - Receive in FW 
+
+============
+Hash uploaded
+Added to freshworks (In backlog pile)
+Password change at login off
+Emailed device setup and printed off
+User added to Intune_Api_Users
+============
+Block Office applications from injecting code into other processes
+Block Office applications from creating executable content
+Block all Office applications from creating child processes
+Block Win32 API calls from Office macro
+Block execution of potentially obfuscated scripts (js/vbs/ps)
+Block JavaScript or VBScript from launching downloaded executable content
+Block executable content download from email and webmail clients
+Block credential stealing from the Windows local security authority subsystem (lsass.exe)
+Defender potentially unwanted app action
+Block untrusted and unsigned processes that run from USB
+
+============
+adobe remote update manager  win32 app 
+scheduled task on login 
+update pc 
+
+============
+542047-487696-009845-667546-220847-663839-406329-342936
+227260-179113-265298-653367-126841-718091-225962-228371
+451561-327107-135454-071093-587279-468831-060434-565521
+============
+- securtiy profile
+- run scan 
+get av signature 
+============
+apply a security baseline 
+Keep as much on as possible 
+Remove user dependant 
+surpress notifacations 
+update ring 0 notifacation and restart  for maintenence 1am
+message dc managers for maintenence window for devices (need to be in shift change)
+
+ 
+
+============
+James at the covid helpline 
+
+============
+Default password = Deep1sarechanting
+============
+Casandra Elwick or Craig
+Kelly Smart - followup about zoom
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+tes@stategrowth.tas.gov.au
+explain situation 
+only have access to manual 
+beg for removal
+============
+	RITM0054718
+============
+Supply chain,
+take scanner down 
+dock and lapto serials
+find out required apps 
+asset tag
+continue without internet 
+feature update 
+reset 
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+
+============
+

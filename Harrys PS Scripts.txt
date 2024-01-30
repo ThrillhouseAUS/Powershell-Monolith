@@ -1,0 +1,218 @@
+ _______ _______  ______ _____  _____  _______ _______
+ |______ |       |_____/   |   |_____]    |    |______
+ ______| |_____  |    \_ __|__ |          |    ______|
+
+
+==================
+Add multiple AD groups:
+[void][System.Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic') 
+$user = [Microsoft.VisualBasic.Interaction]::InputBox("Enter an username", "Get AD Group Membership", "") 
+#adds multiples groups to a user.
+$groups = Get-Content -Path d:\UserGroupList.txt
+ForEach ($group in $groups) 
+{
+    # Set the default password for the current account
+    Add-ADGroupMember -Identity $group -Members $user
+    
+    Write-Host Added to groups"
+}
+
+
+==================
+Bulk Password reset:
+
+
+Import-Module ActiveDirectory
+
+# Set the default password
+$resetpass = Get-Date -Format "dddd"
+$resetpass += Get-Date -Format "dd"
+$password = ConvertTo-SecureString -AsPlainText $resetpass -Force 
+ 
+# Get the list of accounts from the file on file
+# List the user names one per line
+$users = Get-Content -Path d:\UserList.txt
+ 
+ForEach ($user in $users) 
+{
+    # Set the default password for the current account
+    Get-ADUser $user | Set-ADAccountPassword -NewPassword $password -Reset
+    
+    #If you need to set the property “Change password at next logon”, 
+    #leave the next alone. If not, comment the next line
+    Get-ADUser $user | Set-AdUser -ChangePasswordAtLogon $true
+    
+    Write-Host “Password has been reset for the user: $user
+}
+
+
+==================
+Disable AD and archive: 
+
+[void][System.Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic') 
+$username = [Microsoft.VisualBasic.Interaction]::InputBox("Enter an username", "Get AD Group Membership", "") 
+Get-ADuser -Identity $username -Properties Manager, Department
+Set-ADUser -Identity $username -Manager $null
+Set-ADUser -Identity $username -Department Disabled
+$path = Get-ADUser -Identity $username -properties Homedirectory | Select -ExpandProperty Homedirectory
+$tkowncmd = 'takeown /f ' + $path + ' /r'
+echo $tkowncmd
+Invoke-Expression $tkowncmd
+cd $path
+cd .. 
+Move-Item -path $path -Destination ./ARCHIVE/
+cd /
+echo complete!
+ 
+ 
+
+
+
+==================
+  ______   _______         ________                      __           
+ /      \ |       \       |        \                    |  \          
+|  $$$$$$\| $$$$$$$\       \$$$$$$$$  ______    ______  | $$  _______ 
+| $$___\$$| $$  | $$         | $$    /      \  /      \ | $$ /       \
+ \$$    \ | $$  | $$         | $$   |  $$$$$$\|  $$$$$$\| $$|  $$$$$$$
+ _\$$$$$$\| $$  | $$         | $$   | $$  | $$| $$  | $$| $$ \$$    \ 
+|  \__| $$| $$__/ $$         | $$   | $$__/ $$| $$__/ $$| $$ _\$$$$$$\
+ \$$    $$| $$    $$         | $$    \$$    $$ \$$    $$| $$|       $$
+  \$$$$$$  \$$$$$$$           \$$     \$$$$$$   \$$$$$$  \$$ \$$$$$$$
+
+
+
+#Welcome to SD Tools, the premuim in crappy self made job efficiency programs.
+#Feel free to add your own stuff or just leave it as is, I can't tell you what to do as I am just a text comment.
+#Created by: Harry Goodwin for use in the TRANSURBAN prod environment
+#Project start date: 28/06/2020 AEST
+
+#GUI Build.
+
+Add-Type -assembly System.Windows.Forms
+$main_form = New-Object System.Windows.Forms.Form
+$main_form.Text ='SD Tools'
+$main_form.Width = 600
+$main_form.Height = 400
+$main_form.AutoSize = $true
+
+$resetpassb = New-Object System.Windows.Forms.Button
+$resetpassb.Location = New-Object System.Drawing.Size(400,10)
+$resetpassb.Size = New-Object System.Drawing.Size(120,23)
+$resetpassb.Text = "Password Reset"
+$main_form.Controls.Add($resetpassb)
+
+$uinfo = New-Object System.Windows.Forms.Button
+$uinfo.Location = New-Object System.Drawing.Size(400,40)
+$uinfo.Size = New-Object System.Drawing.Size(120,23)
+$uinfo.Text = "Get User Info"
+$main_form.Controls.Add($uinfo)
+
+$exportG = New-Object System.Windows.Forms.Button
+$exportG.Location = New-Object System.Drawing.Size(400,70)
+$exportG.Size = New-Object System.Drawing.Size(120,23)
+$exportG.Text = "Export Groups"
+$main_form.Controls.Add($exportG)
+
+$Label3 = New-Object System.Windows.Forms.Label
+$Label3.Text = ""
+$Label3.Location  = New-Object System.Drawing.Point(110,40)
+$Label3.AutoSize = $true
+$main_form.Controls.Add($Label3)
+
+#Function 1 Export Groups, this will export all of a users groups to a txt file in your temp folder.
+$exportG.Add_Click(
+{
+# Input Box 
+[void][System.Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic') 
+$samname = [Microsoft.VisualBasic.Interaction]::InputBox("Enter an username or computername$", "Get AD Group Membership", "") 
+# Get-ADPrincipalGroupMembership with specified username and export it to c:\samaccountname.csv 
+Get-ADPrincipalGroupMembership $samname | select name | export-csv "D:\$samname.csv" 
+Label3.Text = "Done, go to D:\ for results" 
+}
+)
+
+
+
+#Function 2 Gives you a users info for troubleshooting, it's a good way to find out if their account is disabled too :) 
+$uinfo.Add_Click(
+{
+# Input Box 
+[void][System.Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic') 
+$uname = [Microsoft.VisualBasic.Interaction]::InputBox("Enter a username$", "Get AD user details", "") 
+#Get-ADUser with specified username to see data.
+$Label3.Text = Get-ADUser $uname
+#Get-ADUser -filter {Enabled -eq $True -and PasswordNeverExpires -eq $False} –Properties "DisplayName", "msDS-UserPasswordExpiryTimeComputed" |
+#Select-Object -Property "Displayname",@{Name="ExpiryDate";Expression={[datetime]::FromFileTime($_."msDS-UserPasswordExpiryTimeComputed")}}
+}
+)
+
+
+
+#Function 3 I reset the users password to a simplified format after some checks for example if the date is monday the 4th then the password will set to Monday04 
+$resetpassb.Add_Click(
+{
+$resetpass = Get-Date -Format "dddd"
+$resetpass += Get-Date -Format "dd"
+[void][System.Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic') 
+$uname = [Microsoft.VisualBasic.Interaction]::InputBox("Enter a username$", "Get AD user details", "") 
+Set-ADAccountPassword -Identity $uname -Reset -NewPassword (ConvertTo-SecureString -AsPlainText "$resetpass" -Force)
+Label3.Text = "Password reset to" + $resetpass
+}
+)
+
+
+$main_form.ShowDialog()
+
+
+
+
+
+
+
+
+==================
+[void][System.Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic') 
+$username = [Microsoft.VisualBasic.Interaction]::InputBox("Enter an username", "Get AD Group Membership", "") 
+$WorkspaceName = Get-WKSWorksapce -UserName $username | Select -WorkspaceID
+Restart-WKSWorksapce -WorkspaceID $WorkspaceName 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==================
+
+==================
+
+==================
+
+==================
+
+==================
+
+==================
+
+==================
+
+==================
+
+==================
+
+==================
+
+==================
+
+==================
+
+==================
+
