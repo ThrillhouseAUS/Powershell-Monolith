@@ -171,8 +171,25 @@ $main_form.ShowDialog()
 
 
 ==================
+
 [void][System.Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic') 
 $username = [Microsoft.VisualBasic.Interaction]::InputBox("Enter an username", "Get AD Group Membership", "") 
 $WorkspaceName = Get-WKSWorksapce -UserName $username | Select -WorkspaceID
 Restart-WKSWorksapce -WorkspaceID $WorkspaceName 
 
+==================
+
+##Remove Quick Assist## 
+
+$checkQuickAssist = 
+Get-WindowsCapability -online |
+where-object {$_.name -like "*QuickAssist*"}
+
+if($checkQuickAssist.state -eq 'Installed'){
+    try{
+        Remove-WindowsCapability -online -name $checkQuickAssist.name -ErrorAction Stop
+    }
+    catch{
+        $error[0].Exception.Message
+    }
+}
