@@ -245,3 +245,16 @@ if($checkQuickAssist.state -eq 'Installed'){
         $error[0].Exception.Message
     }
 }
+
+
+
+==================
+
+$csv = Import-Csv ./book1.csv
+$export = foreach ($name in $csv)
+{
+    Get-MailboxStatistics -Identity $name.email -Archive | Select DisplayName, TotalItemSize, ItemCount
+} 
+$export | Export-Csv -Path ./completed.csv -NoTypeInformation
+ 
+
