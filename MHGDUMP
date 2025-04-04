@@ -1,0 +1,1691 @@
+ToDo:
+
+Update for high level readers - https://medhealthgroup.sharepoint.com/:w:/r/sites/TheBenandBradChat/_layouts/15/Doc.aspx?sourcedoc=%7B5843D0E8-A012-4BC2-A150-3154DA3C5D90%7D&file=UHG%20SoW%20-%20Domain%20Migration.docx&action=default&mobileredirect=true&DefaultItemOpen=1&ct=1728968385367&wdOrigin=OFFICECOM-WEB.MAIN.REC&cid=4de25f33-2126-4f40-a665-45030876da10&wdPreviousSessionSrc=HarmonyWeb&wdPreviousSession=a71f6732-5dc6-43ed-8dce-2285beea2d3d 
+And this one - https://medhealthgroup.sharepoint.com/:w:/r/sites/TheBenandBradChat/_layouts/15/Doc.aspx?sourcedoc=%7BEDD62CC1-C2EC-406C-AFAB-0BBD0CC2B751%7D&file=UHG%203%20SOW%20update.docx&action=default&mobileredirect=true 
+preparing archive migration 
+prparing mimecast consolodation - domain reqrite 
+
+
+
+
+https://community.mimecast.com/s/article/email-security-cloud-gateway-address-alteration-policy-configuration
+https://community.mimecast.com/s/article/mimecast-mergers-and-acquisitions
+
+    Will new administrator roles be required? - No 
+    Are new internal domains going to be added? - No 
+    Will address rewriting be required? For example, user addresses should be name@companyA.com but are currently name.surname@companyB.com. - yes see Mitch Doc
+    Will users be migrated gradually, or will they all be switched over in one batch? - Batch (Less than 200 users) - Specifically 166
+    Is mailbox delegation required? For example, jsmith@companyA.com must still be able to access emails for john.smith@companyB.com. - Look into - just moving mailbox archive nothing more
+    Should the policies currently in place for Company A users, be implemented for Company B users, or will there be a variation for the different user groups? - Same policy - New Policy for medhealth
+    Will the new users be migrated to the existing network directory and email server? Mimecast recommends reviewing the Connect process for the routing of emails. - Yes 
+    Should the user's legacy data be available in their Mimecast archive? - Yes 
+
+		*** UHG ***
+Make sure everyone is off laptops - Andrewc 
+Mimecast change as above - me 
+email exchange archives - Me 
+medibridge converting to medhealth - full thing 
+
+
+
+
+
+
+
+
+
+
+
+
+Teams Machine-Wide Installer
+7-Zip 19.00 (x64 edition)
+Adobe Acrobat Reader DC	
+Apex Migration v3
+Cisco AnyConnect VPN
+GFI FaxMaker Client
+Local Administrator Password Solution x64
+Local Administrator Password Solution x86
+Microsoft Office Professional Plus 2010	
+Microsoft Office Professional Plus 2010 - Silent
+Office Home Removal
+Apex one Migrate to SaaS
+Google Chrome
+Google Chrome 88.0.4324.150	
+Java 7 Update 51
+Local Administrator Password Solution x64-copy
+Microsoft .NET Framework 3.5
+Mimecast for Outlook 32-bit	1
+Mimecast for Outlook 64-bit	1
+Mimecast for Outlook 64-bit-7.10
+Mimecast for Outlook 64-bit-7.8.0.125
+Rapid7 Insight Agent
+Trend Apex1 Cloud
+Trend Endpoint Encryption
+Trend FDE Upgrade	
+Trend Micro Apex One Security Agent
+Uninstall HP Sure Click
+Uninstall HP Sure Sense Installer	
+
+
+
+Mitch meeting notes
+	- Lean on other teams more if possible 
+	- UHG Full cutover 20th Jan 
+	- 20th Dec last day of working - office reopen on the 6th
+	- Mimecast change prep today
+	
+	
+Do Printer - lex Medicus 
+
+Look for anything 
+
+Abandoned Floral Umbrella 
+
+-1 Composure: Reflection of the self 
+
+
+m.flowers@medhealth.com.au - Use this for test 
+
+Movies: 
+The Sound Of Metal 
+Ad Astra
+Sorry To Bother you
+Bad Times At The El Royale
+Mandy 
+Alien
+The VVitch 
+Arrival 
+Blade Runner 2049 
+The Grand Budapest Hotel 
+The French Dispatch 
+Civil War
+Brigsby Bear 
+Beats - IMO one of the greatest films of all time 
+For Those in Peril
+Annihilation
+Dune 
+The Ministry of Ungentlemanly Warfare
+The Gentlemen 
+In Bruges
+Ghost In The Shell (1995)
+
+TV Shows:
+The Expanse 
+Silicon Valley
+Mr Robot 
+
+
+
+
+Include Keone in mailbox clearout 
+Look for orignal migration docs for groups they wanted left behind 
+
+turn off domain sync to work on detach 
+
+
+Drill into mimecast - for medebridge 
+
+Domain Detach Look now!!!!!!
+
+all of medebridge authenticates via a single sso on the domain 
+1. workout how and best way 
+2. workout rollbackback plan 
+
+LIkeng messaged re compliance search and delete
+
+
+100
+50
+200
+1000
+230
+100
+500
+422
+1000
+1000
+1000
+1000
+1000
+100
+
+
+A few non standard 
+
+Also checked with Tori, Somali & Mel, they've not used their MedHealth inbox. Salomi isn't back until next Wednesday.
+
+
+To find software, servers, and applications that are sending outbound mail via an Exchange server, you can use a combination of tools and techniques to trace and monitor email traffic, logs, and configurations. Below are some steps you can take to identify these senders:
+1. Review Exchange Server Logs
+
+Exchange logs can provide detailed information about mail flow, including which applications or servers are sending emails. You’ll typically focus on the following log types:
+
+    Message Tracking Logs: These logs capture detailed information about each message that flows through the Exchange server, including the sender, recipient, message size, and routing path.
+
+    To search the message tracking logs, use the Get-MessageTrackingLog cmdlet in PowerShell:
+
+    Get-MessageTrackingLog -Start "2024-11-01" -End "2024-11-07" -EventId "SEND"
+
+    This will show all sent messages during the specified date range. You can filter results by sender, recipient, or other parameters to narrow down the information.
+
+    SMTP Logs: For more detailed insights into the actual SMTP communication, you can examine the transport logs found under C:\Program Files\Microsoft\Exchange Server\V15\TransportRoles\Logs\. Look for files related to SMTPSend or SMTPReceive that provide information about how mail is being routed.
+        Send Connector Logs: If the mail is routed through a Send Connector (used to route outbound mail), you can check logs for any anomalies or specific patterns in the connections.
+
+2. Monitor Active Connections (Netstat/PowerShell)
+
+You can use netstat or PowerShell to monitor active outbound connections to the Exchange server's SMTP port (usually port 25 or 587).
+
+    Run the following command to identify outbound connections:
+
+    netstat -an | findstr ":25"  # For SMTP port
+
+    This will show you the IP addresses and applications that are currently connecting to your Exchange server’s SMTP service. You can check if any unexpected applications or servers are making outbound connections.
+
+3. Check Exchange Server’s SMTP Send Connectors
+
+The Send Connector in Exchange controls how email is routed outbound from your organization. You can check the configuration of the send connectors to see which servers or applications are configured to send mail via Exchange.
+
+    To view the send connectors, use:
+
+    Get-SendConnector
+
+    Check the SourceServer and AddressSpaces properties to identify which servers are allowed to send mail through this connector.
+
+4. Check Service Accounts
+
+Certain applications may be using service accounts to send email via Exchange (e.g., monitoring systems, CRM tools, or business applications). If the application is configured to use Exchange Web Services (EWS) or SMTP, it might be leveraging these service accounts.
+
+You can check which service accounts are configured to send email by looking at their permissions and the associated applications. Review Active Directory or Exchange settings for any accounts that might have Send-As or Send-On-Behalf permissions.
+5. Use Security Auditing and Monitoring
+
+To track which servers or applications are connecting to your Exchange server, you can enable security auditing for SMTP or use SIEM (Security Information and Event Management) tools to collect logs. These tools can provide visibility into:
+
+    Authentication attempts via SMTP
+    The IP addresses initiating outbound connections
+    The applications or servers sending the mail
+
+6. Monitor Outbound Mail via Firewall or Proxy Logs
+
+If your network uses a firewall or mail proxy, you can check the outbound traffic logs on these devices. They may have detailed records of SMTP traffic, including the source IPs and the domains they are sending mail to.
+
+    Look for connections on SMTP ports (25, 587, 465) from internal IP addresses to external mail servers.
+    Identify any unusual or unexpected traffic that could indicate unauthorized systems or applications.
+
+7. Review Application-Specific Logs
+
+If you know which applications might be sending email via Exchange, review their specific logs or configuration files. Some common examples include:
+
+    Exchange Web Services (EWS): Applications using EWS can be identified by looking for EWS traffic or entries in the IIS logs on the Exchange server.
+
+    Use IIS logs (typically under C:\inetpub\logs\LogFiles\W3SVC1) to see which applications are making EWS requests.
+
+    SMTP Clients (e.g., apps using MAPI or SMTP): Check the configuration of mail-enabled applications (like CRM systems, ticketing systems, or marketing platforms) that might be sending via SMTP using your Exchange server.
+
+8. Audit Exchange Application Permissions
+
+Check if any applications or services have been granted explicit permissions to send emails via the Exchange server, either through direct permissions on mailboxes or through the configuration of connectors.
+9. Use the Exchange Transport Logs for Analysis
+
+If you're specifically interested in what is being sent out, you can analyze the Exchange Transport logs to see mail flow in detail. The transport logs are generated at the server level and can give you an insight into email routing, connection attempts, and even the software initiating the mail transactions.
+
+
+
+
+Name                           DomainName                     DomainType                                                                              Default
+----                           ----------                     ----------                                                                              -------
+healthscreening.com.au         healthscreening.com.au         Authoritative                                                                           False
+unifiedhealthcaregroup.com.au  unifiedhealthcaregroup.com.au  Authoritative                                                                           False
+uhg3030.mail.onmicrosoft.com   uhg3030.mail.onmicrosoft.com   Authoritative                                                                           False
+medebridgeforms.com            medebridgeforms.com            Authoritative                                                                           False
+medebridge2.com                medebridge2.com                Authoritative                                                                           False
+uhg.com.au                     uhg.com.au                     Authoritative                                                                           True
+medebridge.com.au              medebridge.com.au              Authoritative                                                                           False
+medicolegalopinions.com.au     medicolegalopinions.com.au     Authoritative                                                                           False
+
+
+
+Looks at security permissiosn for medebridge graph api - update permission on destination tennant to give access to shared mailboxes that I create
+make sure they're in bittitan and run test credentials 
+
+
+11/11/24:
+Check if they had been migrated and never used done 
+- Health Check on medebridge.com.au address 
+- if there's no forward on them check tennant on uhg side - No forwarding policy in mimecast or 365 admin
+- check if friday mailboxes are groups or smbx - not shared, removing from bittitan
+- remove any mailbox that doesn't have a forwarding rule - Check support and info 
+- particulariliy ones that have the primary smtp address medebridge.com.au
+
+info@medebridge.com.au - Info@uhg.au 0.12gb
+support@medebridge.com.au - support@uhg.au 0.17gb
+
+
+AcceptMessagesOnlyFromWithDisplayNames                 : {}
+AcceptMessagesOnlyFromSendersOrMembersWithDisplayNames : {}
+AcceptMessagesOnlyFromDLMembersWithDisplayNames        : {}
+GrantSendOnBehalfToWithDisplayNames                    : {}
+Database                                               : AUSPR01DG179-db072
+DatabaseGuid                                           : b2ae331e-5468-44a7-bf5b-410fb429a40b
+MailboxProvisioningConstraint                          : 
+IsMonitoringMailbox                                    : False
+MailboxRegion                                          : 
+MailboxRegionLastUpdateTime                            : 
+MailboxRegionSuffix                                    : None
+MessageRecallProcessingEnabled                         : True
+MessageCopyForSentAsEnabled                            : False
+MessageCopyForSendOnBehalfEnabled                      : False
+MailboxProvisioningPreferences                         : {}
+UseDatabaseRetentionDefaults                           : False
+RetainDeletedItemsUntilBackup                          : False
+DeliverToMailboxAndForward                             : False
+IsExcludedFromServingHierarchy                         : False
+IsHierarchyReady                                       : True
+IsHierarchySyncEnabled                                 : True
+IsPublicFolderSystemMailbox                            : False
+HasSnackyAppData                                       : False
+LitigationHoldEnabled                                  : False
+SingleItemRecoveryEnabled                              : True
+RetentionHoldEnabled                                   : False
+EndDateForRetentionHold                                : 
+StartDateForRetentionHold                              : 
+RetentionComment                                       : 
+RetentionUrl                                           : 
+LitigationHoldDate                                     : 
+LitigationHoldOwner                                    : 
+ElcProcessingDisabled                                  : False
+ComplianceTagHoldApplied                               : False
+WasInactiveMailbox                                     : False
+DelayHoldApplied                                       : False
+DelayReleaseHoldApplied                                : False
+PitrEnabled                                            : False
+PitrCopyIntervalInSeconds                              : 0
+PitrPaused                                             : False
+PitrPausedTimestamp                                    : 
+PitrOffboardedTimestamp                                : 
+PitrState                                              : None
+InactiveMailboxRetireTime                              : 
+OrphanSoftDeleteTrackingTime                           : 
+LitigationHoldDuration                                 : Unlimited
+ManagedFolderMailboxPolicy                             : 
+RetentionPolicy                                        : Default MRM Policy
+AddressBookPolicy                                      : 
+CalendarRepairDisabled                                 : False
+ExchangeGuid                                           : bf7aabb5-a7ff-4921-8e4c-eff104d7c3da
+MailboxContainerGuid                                   : 
+UnifiedMailbox                                         : 
+MailboxLocations                                       : {1;bf7aabb5-a7ff-4921-8e4c-eff104d7c3da;Primary;ausprd01.prod.outlook.com;b2ae331e-5468-44a7-bf5b-410fb429a40b}
+AggregatedMailboxGuids                                 : {}
+ExchangeSecurityDescriptor                             : System.Security.AccessControl.RawSecurityDescriptor
+ExchangeUserAccountControl                             : None
+AdminDisplayVersion                                    : Version 15.20 (Build 8137.29)
+MessageTrackingReadStatusEnabled                       : True
+ExternalOofOptions                                     : External
+ForwardingAddress                                      : 
+ForwardingSmtpAddress                                  : smtp:melissa.flowers@medebridge.com.au
+RetainDeletedItemsFor                                  : 14.00:00:00
+IsMailboxEnabled                                       : True
+Languages                                              : {en-US}
+OfflineAddressBook                                     : 
+ProhibitSendQuota                                      : 99 GB (106,300,440,576 bytes)
+ProhibitSendReceiveQuota                               : 100 GB (107,374,182,400 bytes)
+RecoverableItemsQuota                                  : 100 GB (107,374,182,400 bytes)
+RecoverableItemsWarningQuota                           : 90 GB (96,636,764,160 bytes)
+CalendarLoggingQuota                                   : 6 GB (6,442,450,944 bytes)
+DowngradeHighPriorityMessagesEnabled                   : False
+ProtocolSettings                                       : {RemotePowerShell§1, MAPI§1§0§§§0§§§§§0, PublicFolderClientAccess§0, IMAP4§1§§§§§§§§§§§§...}
+RecipientLimits                                        : 500
+ImListMigrationCompleted                               : False
+SiloName                                               : 
+IsResource                                             : False
+IsLinked                                               : False
+IsShared                                               : False
+IsRootPublicFolderMailbox                              : False
+LinkedMasterAccount                                    : 
+ResetPasswordOnNextLogon                               : False
+ResourceCapacity                                       : 
+ResourceCustom                                         : {}
+ResourceType                                           : 
+RoomMailboxAccountEnabled                              : 
+SamAccountName                                         : $BTURM0-KFLQEGLQHNF4
+SCLDeleteThreshold                                     : 
+SCLDeleteEnabled                                       : 
+SCLRejectThreshold                                     : 
+SCLRejectEnabled                                       : 
+SCLQuarantineThreshold                                 : 
+SCLQuarantineEnabled                                   : 
+SCLJunkThreshold                                       : 
+SCLJunkEnabled                                         : 
+AntispamBypassEnabled                                  : False
+ServerLegacyDN                                         : /o=ExchangeLabs/ou=Exchange Administrative Group (FYDIBOHF23SPDLT)/cn=Configuration/cn=Servers/cn=SY2PR01MB2860
+ServerName                                             : sy2pr01mb2860
+UseDatabaseQuotaDefaults                               : False
+IssueWarningQuota                                      : 98 GB (105,226,698,752 bytes)
+RulesQuota                                             : 256 KB (262,144 bytes)
+Office                                                 : Prahran
+UserPrincipalName                                      : melissa.flowers@uhg.au
+UMEnabled                                              : False
+MaxSafeSenders                                         : 
+MaxBlockedSenders                                      : 
+NetID                                                  : 10032002845E443C
+ReconciliationId                                       : 
+WindowsLiveID                                          : melissa.flowers@uhg.au
+MicrosoftOnlineServicesID                              : melissa.flowers@uhg.au
+ThrottlingPolicy                                       : 
+RoleAssignmentPolicy                                   : Default Role Assignment Policy
+DefaultPublicFolderMailbox                             : 
+EffectivePublicFolderMailbox                           : 
+SharingPolicy                                          : Default Sharing Policy
+RemoteAccountPolicy                                    : 
+MailboxPlan                                            : ExchangeOnlineEnterprise-de31969f-bd0d-4ee7-852d-f3976e9442f9
+ArchiveDatabase                                        : 
+ArchiveDatabaseGuid                                    : 00000000-0000-0000-0000-000000000000
+ArchiveGuid                                            : 00000000-0000-0000-0000-000000000000
+ArchiveName                                            : {}
+JournalArchiveAddress                                  : 
+ArchiveQuota                                           : 100 GB (107,374,182,400 bytes)
+ArchiveWarningQuota                                    : 90 GB (96,636,764,160 bytes)
+ArchiveDomain                                          : 
+ArchiveStatus                                          : None
+ArchiveState                                           : None
+AutoExpandingArchiveEnabled                            : False
+DisabledMailboxLocations                               : False
+RemoteRecipientType                                    : ProvisionMailbox
+DisabledArchiveDatabase                                : 
+DisabledArchiveGuid                                    : 00000000-0000-0000-0000-000000000000
+QueryBaseDN                                            : 
+QueryBaseDNRestrictionEnabled                          : False
+MailboxMoveTargetMDB                                   : 
+MailboxMoveSourceMDB                                   : 
+MailboxMoveFlags                                       : None
+MailboxMoveRemoteHostName                              : 
+MailboxMoveBatchName                                   : 
+MailboxMoveStatus                                      : None
+MailboxRelease                                         : 
+ArchiveRelease                                         : 
+IsPersonToPersonTextMessagingEnabled                   : False
+IsMachineToPersonTextMessagingEnabled                  : False
+UserSMimeCertificate                                   : {}
+UserCertificate                                        : {}
+CalendarVersionStoreDisabled                           : False
+ImmutableId                                            : 
+PersistedCapabilities                                  : {GRAPH_CONNECTORS_SEARCH_INDEX, BPOS_S_BookingsAddOn, MYANALYTICSP2, BPOS_S_Enterprise}
+SKUAssigned                                            : True
+AuditEnabled                                           : True
+AuditLogAgeLimit                                       : 90.00:00:00
+AuditAdmin                                             : {Update, MoveToDeletedItems, SoftDelete, HardDelete...}
+AuditDelegate                                          : {Update, MoveToDeletedItems, SoftDelete, HardDelete...}
+AuditOwner                                             : {Update, MoveToDeletedItems, SoftDelete, HardDelete...}
+DefaultAuditSet                                        : {Admin, Delegate, Owner}
+WhenMailboxCreated                                     : 14/03/2023 2:07:02 PM
+SourceAnchor                                           : 
+UsageLocation                                          : Australia
+IsSoftDeletedByRemove                                  : False
+IsSoftDeletedByDisable                                 : False
+IsInactiveMailbox                                      : False
+IncludeInGarbageCollection                             : False
+WhenSoftDeleted                                        : 
+RecipientSoftDeletedStatus                             : 0
+InPlaceHolds                                           : {}
+GeneratedOfflineAddressBooks                           : {}
+AccountDisabled                                        : False
+StsRefreshTokensValidFrom                              : 11/11/2024 8:19:33 AM
+NonCompliantDevices                                    : {}
+EnforcedTimestamps                                     : [{"EventTimestamp":"2024-11-10T21:20:27.7739308Z","EnforcedUntilTimestamp":"2024-11-10T21:15:27.7739308Z","EventType":17},{"EventTime
+                                                         stamp":"2024-10-07T21:11:16.0625484Z","EnforcedUntilTimestamp":"2024-10-07T21:06:16.0625484Z","EventType":17},{"EventTimestamp":"2024
+                                                         -09-04T21:34:48.9719175Z","EnforcedUntilTimestamp":"2024-09-04T21:29:48.9719175Z","EventType":17},{"EventTimestamp":"2024-07-31T21:28
+                                                         :34.2913075Z","EnforcedUntilTimestamp":"2024-07-31T21:23:34.2913075Z","EventType":17},{"EventTimestamp":"2024-07-31T21:26:33.7570395Z
+                                                         ","EnforcedUntilTimestamp":"2024-07-31T21:21:33.7570395Z","EventType":17}]
+DataEncryptionPolicy                                   : 
+MessageCopyForSMTPClientSubmissionEnabled              : True
+RecipientThrottlingThreshold                           : Standard
+SharedEmailDomainTenant                                : 
+SharedEmailDomainState                                 : None
+SharedWithTargetSmtpAddress                            : 
+SharedEmailDomainStateLastModified                     : 
+EmailAddressDisplayNames                               : {}
+ResourceProvisioningOptions                            : {}
+HasPicture                                             : False
+HasSpokenName                                          : False
+IsDirSynced                                            : True
+AcceptMessagesOnlyFrom                                 : {}
+AcceptMessagesOnlyFromDLMembers                        : {}
+AcceptMessagesOnlyFromSendersOrMembers                 : {}
+AddressListMembership                                  : {\Mailboxes(VLV), \Default Global Address List, \Offline Global Address List, \All Users...}
+AdministrativeUnits                                    : {}
+Alias                                                  : melissa.flowers
+ArbitrationMailbox                                     : 
+BypassModerationFromSendersOrMembers                   : {}
+OrganizationalUnit                                     : auspr01a008.prod.outlook.com/Microsoft Exchange Hosted Organizations/medhealthgroup.onmicrosoft.com
+CustomAttribute1                                       : 
+CustomAttribute10                                      : 
+CustomAttribute11                                      : 
+CustomAttribute12                                      : 
+CustomAttribute13                                      : 
+CustomAttribute14                                      : 
+CustomAttribute15                                      : 
+CustomAttribute2                                       : 
+CustomAttribute3                                       : 
+CustomAttribute4                                       : 
+CustomAttribute5                                       : 
+CustomAttribute6                                       : 
+CustomAttribute7                                       : 
+CustomAttribute8                                       : 
+CustomAttribute9                                       : 
+ExtensionCustomAttribute1                              : {}
+ExtensionCustomAttribute2                              : {}
+ExtensionCustomAttribute3                              : {}
+ExtensionCustomAttribute4                              : {}
+ExtensionCustomAttribute5                              : {}
+DisplayName                                            : Melissa Flowers
+EmailAddresses                                         : {SIP:melissa.flowers@uhg.au, SMTP:melissa.flowers@uhg.au, smtp:melissa.flowers@medhealth.com.au, 
+                                                         SPO:SPO_6cbe7be0-dd1e-4169-89ed-90efca16aec5@SPO_9e2b5d0e-80cc-4ad1-99fa-8614238d125e...}
+GrantSendOnBehalfTo                                    : {}
+ExternalDirectoryObjectId                              : 6bfb16db-bafd-404d-9c6b-46aeb4793191
+HiddenFromAddressListsEnabled                          : False
+LastExchangeChangedTime                                : 
+LegacyExchangeDN                                       : /o=ExchangeLabs/ou=Exchange Administrative Group (FYDIBOHF23SPDLT)/cn=Recipients/cn=2e151a223a314780a3f3d3b29e5a87cb-6bfb16db-ba
+MaxSendSize                                            : 48.83 MB (51,200,000 bytes)
+MaxReceiveSize                                         : 48.83 MB (51,200,000 bytes)
+ModeratedBy                                            : {}
+ModerationEnabled                                      : False
+PoliciesIncluded                                       : {}
+PoliciesExcluded                                       : {{26491cfc-9e50-4857-861b-0cb8df22b5d7}}
+EmailAddressPolicyEnabled                              : False
+PrimarySmtpAddress                                     : melissa.flowers@uhg.au
+RecipientType                                          : UserMailbox
+RecipientTypeDetails                                   : UserMailbox
+RejectMessagesFrom                                     : {}
+RejectMessagesFromDLMembers                            : {}
+RejectMessagesFromSendersOrMembers                     : {}
+RequireSenderAuthenticationEnabled                     : False
+SimpleDisplayName                                      : 
+SendModerationNotifications                            : Always
+UMDtmfMap                                              : {reversedPhone:3858550031, emailAddress:63547723569377, lastNameFirstName:35693776354772, firstNameLastName:63547723569377}
+WindowsEmailAddress                                    : melissa.flowers@uhg.au
+MailTip                                                : 
+MailTipTranslations                                    : {}
+Identity                                               : 6bfb16db-bafd-404d-9c6b-46aeb4793191
+Id                                                     : 6bfb16db-bafd-404d-9c6b-46aeb4793191
+IsValid                                                : True
+ExchangeVersion                                        : 0.20 (15.0.0.0)
+Name                                                   : 6bfb16db-bafd-404d-9c6b-46aeb4793191
+DistinguishedName                                      : CN=6bfb16db-bafd-404d-9c6b-46aeb4793191,OU=medhealthgroup.onmicrosoft.com,OU=Microsoft Exchange Hosted 
+                                                         Organizations,DC=AUSPR01A008,DC=PROD,DC=OUTLOOK,DC=COM
+ObjectCategory                                         : AUSPR01A008.PROD.OUTLOOK.COM/Configuration/Schema/Person
+ObjectClass                                            : {top, person, organizationalPerson, user}
+WhenChanged                                            : 11/11/2024 8:20:42 AM
+WhenCreated                                            : 14/03/2023 2:07:02 PM
+WhenChangedUTC                                         : 10/11/2024 9:20:42 PM
+WhenCreatedUTC                                         : 14/03/2023 3:07:02 AM
+ExchangeObjectId                                       : 7699ba79-fa31-4009-b831-66c6ab37e6c2
+OrganizationalUnitRoot                                 : medhealthgroup.onmicrosoft.com
+OrganizationId                                         : AUSPR01A008.PROD.OUTLOOK.COM/Microsoft Exchange Hosted Organizations/medhealthgroup.onmicrosoft.com - 
+                                                         AUSPR01A008.PROD.OUTLOOK.COM/ConfigurationUnits/medhealthgroup.onmicrosoft.com/Configuration
+Guid                                                   : 7699ba79-fa31-4009-b831-66c6ab37e6c2
+OriginatingServer                                      : SYCPR01A08DC003.AUSPR01A008.PROD.OUTLOOK.COM
+ObjectState                                            : Unchanged
+
+
+
+13/11/24 - mimecast and mail relays 
+smtp connector for qlik application  - Tanvir
+Look at other server you found to contact the right person about what to do with it - OnPrem Exchange 
+authenticating using an internal directory of mimecast and recreate 
+reconsile lists for smbx and DG's 
+in detail mimecast detach and domain detach on 365 and attach new aliases 
+-emailaddresses add@{addy1, addy2}
+
+To add or remove specify proxy addresses without affecting other existing values,
+use the following syntax: @{Add="Type:EmailAddress1","Type:EmailAddress2",...; 
+Remove="Type:EmailAddress3","Type:EmailAddress4",...}.
+
+step by step domain detach in the cutover email folder and break glass rollback instructions 
+tanvir about sql servers
+maintain mimecast access to uhg tennant - Make all accounts for admins to mimecast only (no ad sync)
+
+look at mimecast ad disconnect - try azure ad cloud identitty to sso to mimecast 
+
+make our admin accounts not hybrid - in mimecast when connected to local AD should still work account will neeed to be onmicrosoft (or at least not @uhg.com.au)
+
+f7edc548-65f3-43c2-bada-80cff44753a3   
+
+Mimecast and azure local accounts send to andrew and mitch 
+
+Make sure we have mailtrap for snadbo envrionment to stop sending medibridge mail out MAILTRAP 
+
+Get Tanvir to change account details so I can delete account 
+
+
+ToDo 
+error with send/ receive limit - done check soon 
+Netskope broken fixed 
+error with auto forwards
+https://servicedesk.medhealth.com.au/a/tickets/204813?current_tab=details
+
+liase with security for SPAM emails
+
+Friday 5 hours 
+Sat 3 hours 
+
+Find temp fixes for cleanup 
+document and store
+shared folder cleanup 
+example forwarding rules in MHG mimecast turn off 
+temporary accounts permission
+
+
+
+mimecast20241203
+mimecast20241203._domainkey.medebridge.com.au
+
+
+FINDING DEPENDANCIES
+- Check for forwarding rules 
+- Medebridge links? 
+
+Linda Geron 
+
+
+create uhghsn admins for mitch and andrew 
+look at bittitan compatibility with kiosk license 
+
+
+
+Do B99 intro for all items
+edgar allen wright smash cuts 
+add mitch scene 
+
+# Sets the PowerShell language mode to "FullLanguage".
+# FullLanguage = 8 & ConstrainedLanguage = 4.
+
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment\" -name __PSLockdownPolicy -Value 8
+
+
+2025 Planning - Woohoo
+
+Kepp Dom, Ahmed and Bernard
+RTS Firewalls upgraded before end of March 2025
+Start this before rest of scoping 
+old devices are sophos - what are we upgrading to? Most likely Meraki?
+Seperate configured with their subnet so replicating ther other offices (Not penrith)
+IP4 translation feature in Merakis we can use
+
+
+For HSN 
+Tee up time with pippa for SD new starter guide 
+
+
+AIM IP Telephony 
+Joshes old emails
+Have some documentation
+New change of ownership
+Team environments set up, needs individual office response groups
+Hanrahan had some stuff asking about teams environments 
+getting approvals 
+Environment building 
+we need to get a heads up for desk phones 
+Andy doing Monday board
+
+*** Research project ***
+Look for potential alternatives for bittitan 
+https://cloudiway.com/the-best-bittitan-alternative-why-choose-cloudiway/
+
+
+Security cams at UHG 
+Key to get server room secuirty fob
+
+Job access stuff
+Kate dealing with offboards 
+few staff moving departments
+test uhghsn internal domain 
+
+Ben Phyphers - for domains 
+create users,
+test license and requirements 
+address book restriction
+
+Restrictions for HSN users 
+Emails each other 
+Restrict address book 
+hsn.uhg.com.au
+Bug Stefan Althezar for test users 
+
+MRRS - soloution 
+
+Healthscreening.com.au
+
+Looks for discovery tools
+
+-	Test run hsn.uhg.com.au account creation
+o	May need to chat to Jayden Zayat in SD on user creation script if you have any issues (is a KBA for it too) Done
+o	It all should run of the security user I created in the UHG/HSN OU, that’ll need to be updated with the new domain when it’s completed. Done
+o	Stefan Lejcak is the lad that’ll update medEbridge creds for us.
+	Am still waiting on another export with the Provider Type for the job title for signatures.
+o	Check new domain is federated with Don Robinson (once created)
+-	Dry run on onboarding process
+o	Jason Lauan in EUC can help if that android mobile is assigned to MedHealth in NUX
+o	Do a UAT run with Stefan Balthazaar as well so he’s on top of the process & happy with it.
+-	Update onboarding doc with additional photos of mobile sign in, mfa & outlook (bump it out to 4 pages)
+
+set the change to end of wednesday to the 21st 
+
+
+
+
+
+Implementation details
+
+    Name:    Mitch Duff, Harry Goodwin, Andrew Forster, Stefan Balthazaar, Stefan Lejcak
+    Email:    mitch.duff@medhealth.com.au, aforster@medhealth.com.au, harry.goodwin@medhealth.com.au, stefan.balthazaar@uhg.au, s.lejcak@medhealth.com.au
+    Phone:   0428 556 338
+
+
+Implementation steps:
+
+IT Business Services team:
+
+    Setup new domain (hsn.uhg.com.au)
+    Create restricted address list & emailing whitelist for new domain
+    Procure F3 licenses
+    Create new on-prem user accounts on MedHealth tenancy using standard processes
+    Create distribution group (dynamic)
+    Setup BitTitan on both domains in prep for email transfer.
+    medEbridge team to enable federated authentication with new domain (hsn.uhg.com.au).
+    Organise users into migration batches
+    Send comms to users with new account login info prior to migration
+    On day of migration conduct email data transfer from existing accounts to new accounts (Friday after COB).
+    Forward mail from old account to new account.
+    medEbridge team to bulk update medEbridge access for migrated users
+    On following Monday (& rest of week), contractors to conduct onboarding (sign into O365 account, setup MFA & access medEbridge)
+    One users are migrated, migrate uhghsn.com.au domain & add as alias to migrated users.
+
+
+The Business Services team & Stefan Balthazaar will be on call using the dedicated number (03 9659 5670) for any issues the contractors may experience.
+
+Get HSN migration ready on bititan - validate credentials stuff and look into the difference on Kiosk licensing 
+Add UPN to AD and AAD 
+Create wildcard SAN cert 
+
+
+Don will do federated authentication, talk to him for the test 
+run in on home rig 
+What if app, condition, 365 admin 
+
+
+
+
+
+Friday NEEDS COMPLETEING 
+- Test Users 
+- Final Mail Restriction testing 
+- BitTitan Setup 
+- Final Doco Edit 
+
+Sal? 
+
+TestPasswordPleaseIgnore97!
+
+Ryan Derham - Email Signatures 
+Get primary address on EXO sorted for hsn.
+
+# Import necessary modules
+Import-Module ActiveDirectory
+Import-Module Exchange
+
+# Define Variables
+$OU = "OU=Users,DC=yourdomain,DC=com"   # Change this to your target OU
+$OldDomain = "oldomain.com"             # Existing domain to replace
+$NewDomain = "newdomain.com"             # New domain for email addresses
+
+# Get all users from the specified OU
+$Users = Get-ADUser -Filter * -SearchBase $OU -Properties mail, proxyAddresses
+
+foreach ($User in $Users) {
+    $SamAccountName = $User.SamAccountName
+    $OldEmail = $User.mail
+
+    if ($OldEmail -like "*@$OldDomain") {
+        # Construct new Primary SMTP Address
+        $NewEmail = $OldEmail -replace $OldDomain, $NewDomain
+
+        # Modify ProxyAddresses
+        $ProxyAddresses = $User.proxyAddresses
+        $ProxyAddresses = $ProxyAddresses -notmatch "SMTP:" # Remove old primary
+        $ProxyAddresses += "smtp:$OldEmail"  # Keep old email as alias
+        $ProxyAddresses += "SMTP:$NewEmail"  # New primary email (uppercase SMTP)
+
+        # Apply changes
+        Set-ADUser $User.DistinguishedName -EmailAddress $NewEmail -Replace @{proxyAddresses = $ProxyAddresses}
+
+        Write-Host "Updated $SamAccountName: $OldEmail -> $NewEmail"
+    } else {
+        Write-Host "Skipping $SamAccountName - No matching domain."
+    }
+}
+
+Write-Host "Finished updating SMTP addresses."
+
+
+
+
+
+
+# Define the input word
+$word = "example@domain.com"
+
+# Use regex to replace everything after '@' with 'uhg.au'
+$modifiedWord = $word -replace "@.*$", "@uhg.au"
+
+# Output the result
+Write-Output $modifiedWord
+
+
+
+
+Fix email forward old domain to MHG 
+
+
+
+# Connect to Exchange Online (You must have Exchange Online module installed)
+Connect-ExchangeOnline -UserPrincipalName admin@yourdomain.com
+
+# Define the Security Group name
+$SecurityGroup = "HSN ALL USERS"
+
+# Create Address List for users in the security group
+New-AddressList -Name "HSN Users Address List" -RecipientFilter "(MemberOfGroup -eq 'CN=$SecurityGroup,OU=Microsoft Exchange,DC=yourdomain,DC=com')"
+
+# Create Global Address List (GAL) for the group
+New-GlobalAddressList -Name "HSN Users GAL" -RecipientFilter "(MemberOfGroup -eq 'CN=$SecurityGroup,OU=Microsoft Exchange,DC=yourdomain,DC=com')"
+
+# Create an Offline Address Book (OAB) for the group
+New-OfflineAddressBook -Name "HSN Users OAB" -AddressLists "HSN Users Address List"
+
+# Create Room List (optional) - If you want users to see only certain rooms
+New-AddressList -Name "HSN Room List" -RecipientFilter "((RecipientType -eq 'RoomMailbox') -and (MemberOfGroup -eq 'CN=$SecurityGroup,OU=Microsoft Exchange,DC=yourdomain,DC=com'))"
+
+# Create an Address Book Policy (ABP) and assign the lists
+New-AddressBookPolicy -Name "HSN Users ABP" -AddressLists "HSN Users Address List" -OfflineAddressBook "HSN Users OAB" -GlobalAddressList "HSN Users GAL" -RoomList "HSN Room List"
+
+# Assign the ABP to all users in the security group
+$Users = Get-User -RecipientTypeDetails UserMailbox -Filter "MemberOfGroup -eq 'CN=$SecurityGroup,OU=Microsoft Exchange,DC=yourdomain,DC=com'"
+
+foreach ($User in $Users) {
+    Set-Mailbox -Identity $User.UserPrincipalName -AddressBookPolicy "HSN Users ABP"
+}
+
+Write-Host "Address Book Policy 'HSN Users ABP' applied successfully!"
+
+
+
+
+
+UHG HSN ALL STAFF
+
+group.
+
+$GroupMembers = Get-AzureADGroupMember -ObjectId "<Group-ID>"
+
+Apply the ABP to Mailboxes in Exchange On-Prem
+Now, apply the ABP to the mailboxes using the on-prem Exchange Management Shell:
+
+$ABPName = "Your-ABP-Name"
+
+foreach ($User in $GroupMembers) {
+    Set-Mailbox -Identity $User.UserPrincipalName -AddressBookPolicy $ABPName
+}
+
+
+    + PSComputerName        : aeprdexc01.medhealthgroup.com.au
+
+[PS] C:\Windows\system32>Get-AddressList
+Creating a new session for implicit remoting of "Get-AddressList" command...
+
+Name                      DisplayName               RecipientFilter
+----                      -----------               ---------------
+UHG HSN                   UHG HSN                   ((Company -eq 'UHG HSN') -and (RecipientType -eq 'UserMailbox'))
+All Rooms                 All Rooms                 ((Alias -ne $null) -and (((RecipientDisplayType -eq
+                                                    'ConferenceRoomMailbox') -or (RecipientDisplayType -eq
+                                                    'SyncedConferenceRoomMailbox'))))
+All Contacts              All Contacts              ((Alias -ne $null) -and (((ObjectCategory -like 'person') -and
+                                                    (ObjectClass -eq 'contact'))))
+All Distribution Lists    All Distribution Lists    ((Alias -ne $null) -and (ObjectCategory -like 'group'))
+Public Folders            Public Folders            ((Alias -ne $null) -and (ObjectCategory -like 'publicFolder'))
+All Users                 All Users                 ((Alias -ne $null) -and (((((((ObjectCategory -like 'person')
+                                                    -and (ObjectClass -eq 'user') -and (-not(Database -ne $null))
+                                                    -and (-not(ServerLegacyDN -ne $null)))) -or (((ObjectCategory
+                                                    -like 'person') -and (ObjectClass -eq 'user') -and (((Database
+                                                    -ne $null) -or (ServerLegacyDN -ne $null))))))) -and
+                                                    (-not(RecipientTypeDetailsValue -eq 'GroupMailbox')))))
+
+
+[PS] C:\Windows\system32>Get-AddressBookPolicy
+
+Name              GlobalAddressList AddressLists OfflineAddressBook RoomList
+----              ----------------- ------------ ------------------ --------
+UHG HSN All Staff \UHG HSN GAL      {\UHG HSN}   \UHG HSN OAB       \All Rooms
+
+
+[PS] C:\Windows\system32>get-teansportconfig
+get-teansportconfig : The term 'get-teansportconfig' is not recognized as the name of a cmdlet, function, script
+file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is
+correct and try again.
+At line:1 char:1
++ get-teansportconfig
++ ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (get-teansportconfig:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+[PS] C:\Windows\system32>Get-TransportConfig
+
+
+AddressBookPolicyRoutingEnabled                             : False
+AnonymousSenderToRecipientRatePerHour                       : 1800
+ClearCategories                                             : True
+ConvertDisclaimerWrapperToEml                               : False
+DSNConversionMode                                           : UseExchangeDSNs
+JournalArchivingEnabled                                     : False
+ExternalDelayDsnEnabled                                     : True
+ExternalDsnDefaultLanguage                                  :
+ExternalDsnLanguageDetectionEnabled                         : True
+ExternalDsnMaxMessageAttachSize                             : 10 MB (10,485,760 bytes)
+ExternalDsnReportingAuthority                               :
+ExternalDsnSendHtml                                         : True
+ExternalPostmasterAddress                                   :
+GenerateCopyOfDSNFor                                        : {}
+HygieneSuite                                                : Standard
+InternalDelayDsnEnabled                                     : True
+InternalDsnDefaultLanguage                                  :
+InternalDsnLanguageDetectionEnabled                         : True
+InternalDsnMaxMessageAttachSize                             : 10 MB (10,485,760 bytes)
+InternalDsnReportingAuthority                               :
+InternalDsnSendHtml                                         : True
+InternalSMTPServers                                         : {}
+JournalingReportNdrTo                                       : <>
+LegacyJournalingMigrationEnabled                            : False
+LegacyArchiveJournalingEnabled                              : False
+LegacyArchiveLiveJournalingEnabled                          : False
+RedirectUnprovisionedUserMessagesForLegacyArchiveJournaling : False
+RedirectDLMessagesForLegacyArchiveJournaling                : False
+MaxDumpsterSizePerDatabase                                  : 18 MB (18,874,368 bytes)
+MaxDumpsterTime                                             : 7.00:00:00
+MaxReceiveSize                                              : 50 MB (52,428,800 bytes)
+MaxRecipientEnvelopeLimit                                   : 500
+MaxRetriesForLocalSiteShadow                                : 2
+MaxRetriesForRemoteSiteShadow                               : 4
+MaxSendSize                                                 : 50 MB (52,428,800 bytes)
+MigrationEnabled                                            : False
+OpenDomainRoutingEnabled                                    : False
+RejectMessageOnShadowFailure                                : False
+Rfc2231EncodingEnabled                                      : False
+SafetyNetHoldTime                                           : 2.00:00:00
+ShadowHeartbeatFrequency                                    : 00:02:00
+ShadowMessageAutoDiscardInterval                            : 2.00:00:00
+ShadowMessagePreferenceSetting                              : PreferRemote
+ShadowRedundancyEnabled                                     : True
+ShadowResubmitTimeSpan                                      : 03:00:00
+SupervisionTags                                             : {Reject, Allow}
+TLSReceiveDomainSecureList                                  : {}
+TLSSendDomainSecureList                                     : {}
+VerifySecureSubmitEnabled                                   : False
+VoicemailJournalingEnabled                                  : True
+HeaderPromotionModeSetting                                  : NoCreate
+Xexch50Enabled                                              : True
+
+
+
+[PS] C:\Windows\system32>Set-TransportConfig -AddressBookPolicyRoutingEnabled $true
+[PS] C:\Windows\system32>Get-TransportConfig
+
+
+AddressBookPolicyRoutingEnabled                             : True
+AnonymousSenderToRecipientRatePerHour                       : 1800
+ClearCategories                                             : True
+ConvertDisclaimerWrapperToEml                               : False
+DSNConversionMode                                           : UseExchangeDSNs
+JournalArchivingEnabled                                     : False
+ExternalDelayDsnEnabled                                     : True
+ExternalDsnDefaultLanguage                                  :
+ExternalDsnLanguageDetectionEnabled                         : True
+ExternalDsnMaxMessageAttachSize                             : 10 MB (10,485,760 bytes)
+ExternalDsnReportingAuthority                               :
+ExternalDsnSendHtml                                         : True
+ExternalPostmasterAddress                                   :
+GenerateCopyOfDSNFor                                        : {}
+HygieneSuite                                                : Standard
+InternalDelayDsnEnabled                                     : True
+InternalDsnDefaultLanguage                                  :
+InternalDsnLanguageDetectionEnabled                         : True
+InternalDsnMaxMessageAttachSize                             : 10 MB (10,485,760 bytes)
+InternalDsnReportingAuthority                               :
+InternalDsnSendHtml                                         : True
+InternalSMTPServers                                         : {}
+JournalingReportNdrTo                                       : <>
+LegacyJournalingMigrationEnabled                            : False
+LegacyArchiveJournalingEnabled                              : False
+LegacyArchiveLiveJournalingEnabled                          : False
+RedirectUnprovisionedUserMessagesForLegacyArchiveJournaling : False
+RedirectDLMessagesForLegacyArchiveJournaling                : False
+MaxDumpsterSizePerDatabase                                  : 18 MB (18,874,368 bytes)
+MaxDumpsterTime                                             : 7.00:00:00
+MaxReceiveSize                                              : 50 MB (52,428,800 bytes)
+MaxRecipientEnvelopeLimit                                   : 500
+MaxRetriesForLocalSiteShadow                                : 2
+MaxRetriesForRemoteSiteShadow                               : 4
+MaxSendSize                                                 : 50 MB (52,428,800 bytes)
+MigrationEnabled                                            : False
+OpenDomainRoutingEnabled                                    : False
+RejectMessageOnShadowFailure                                : False
+Rfc2231EncodingEnabled                                      : False
+SafetyNetHoldTime                                           : 2.00:00:00
+ShadowHeartbeatFrequency                                    : 00:02:00
+ShadowMessageAutoDiscardInterval                            : 2.00:00:00
+ShadowMessagePreferenceSetting                              : PreferRemote
+ShadowRedundancyEnabled                                     : True
+ShadowResubmitTimeSpan                                      : 03:00:00
+SupervisionTags                                             : {Reject, Allow}
+TLSReceiveDomainSecureList                                  : {}
+TLSSendDomainSecureList                                     : {}
+VerifySecureSubmitEnabled                                   : False
+VoicemailJournalingEnabled                                  : True
+HeaderPromotionModeSetting                                  : NoCreate
+Xexch50Enabled                                              : True
+
+
+
+[PS] C:\Windows\system32>Set-Mailbox -Identity cheryl.zammit@hsn.uhg.com.au -AddressBookPolicy ^C
+[PS] C:\Windows\system32>Set-Mailbox -Identity cheryl.zammit@hsn.uhg.com.au -AddressBookPolicy 'UHG HSN All Staff'
+The operation couldn't be performed because object 'cheryl.zammit@hsn.uhg.com.au' couldn't be found on
+'aeprddc02.medhealthgroup.com.au'.
+    + CategoryInfo          : NotSpecified: (:) [Set-Mailbox], ManagementObjectNotFoundException
+    + FullyQualifiedErrorId : [Server=aeprdexc01,RequestId=7e350527-28ab-4bde-bce5-27047c83cc51,TimeStamp=24/02/202
+   5 10:00:44 AM] [FailureCategory=Cmdlet-ManagementObjectNotFoundException] 41A1DBA2,Microsoft.Exchange.Managemen
+  t.RecipientTasks.SetMailbox
+    + PSComputerName        : aeprdexc01.medhealthgroup.com.au
+
+[PS] C:\Windows\system32>Set-Mailbox -Identity cheryl.zammit@uhg.au -AddressBookPolicy 'UHG HSN All Staff'
+The operation couldn't be performed because object 'cheryl.zammit@uhg.au' couldn't be found on
+'aeprddc02.medhealthgroup.com.au'.
+    + CategoryInfo          : NotSpecified: (:) [Set-Mailbox], ManagementObjectNotFoundException
+    + FullyQualifiedErrorId : [Server=aeprdexc01,RequestId=0bd0fb01-b380-48ff-bf63-05b9e053843a,TimeStamp=24/02/202
+   5 10:01:04 AM] [FailureCategory=Cmdlet-ManagementObjectNotFoundException] A620AD16,Microsoft.Exchange.Managemen
+  t.RecipientTasks.SetMailbox
+    + PSComputerName        : aeprdexc01.medhealthgroup.com.au
+
+[PS] C:\Windows\system32>
+
+New-AddressList -Name 'HSN ALL USERS' -RecipientFilter {(Companyname)}
+
+Set-Mailbox -Identity "UserEmailOrSamAccountName" -AddressBookPolicy "UHG HSN ALL STAFF"
+
+
+Disable sharepoint and onedrive for HSN
+
+Review Change Request CR392
+
+[PS] C:\Windows\system32>Set-RemoteMailbox -Identity beata.molicka@uhg.au -PrimarySmtpAddress beata.molicka@hsn.uhg.com.au
+WARNING: Couldn't update the primary SMTP address because this mailbox is configured to use an email address policy. To disable the email address policy for this
+mailbox, run the command with the EmailAddressPolicyEnabled parameter set to $false.
+[PS] C:\Windows\system32>Set-RemoteMailbox -Identity beata.molicka@uhg.au -PrimarySmtpAddress beata.molicka@hsn.uhg.com.au -EmailAddressPolicyEnabled $false
+
+
+
+WARNING: The command completed successfully but no settings of 'medhealthgroup.com.au/MedHealthGroup/UHG/Users/HSN.UHG/Susan GayJackson' have been modified.
+Primary SMTP address changed to: susan.gayjackson@hsn.uhg.com.au
+WARNING: The command completed successfully but no settings of 'medhealthgroup.com.au/MedHealthGroup/UHG/Users/HSN.UHG/Neenu Thomas' have been modified.
+Primary SMTP address changed to: neenu.thomas@hsn.uhg.com.au
+Cannot process argument transformation on parameter 'PrimarySmtpAddress'. Cannot convert value "ellie rose.carey@hsn.uhg.com.au" to type
+"Microsoft.Exchange.Data.SmtpAddress". Error: "The email address "ellie rose.carey@hsn.uhg.com.au" isn't correct. Please use this format: user name, the @ sign,
+followed by the domain name. For example, tonysmith@contoso.com or tony.smith@contoso.com."
+    + CategoryInfo          : InvalidData: (:) [Set-RemoteMailbox], ParameterBindin...mationException
+    + FullyQualifiedErrorId : ParameterArgumentTransformationError,Set-RemoteMailbox
+    + PSComputerName        : aeprdexc01.medhealthgroup.com.au
+
+Primary SMTP address changed to: ellie rose.carey@hsn.uhg.com.au
+WARNING: The command completed successfully but no settings of 'medhealthgroup.com.au/MedHealthGroup/UHG/Users/HSN.UHG/Sylvia Andrews' have been modified.
+Primary SMTP address changed to: sylvia.andrews@hsn.uhg.com.au
+WARNING: The command completed successfully but no settings of 'medhealthgroup.com.au/MedHealthGroup/UHG/Users/HSN.UHG/Adrian Navarro' have been modified.
+Primary SMTP address changed to: adrian.navarro@hsn.uhg.com.au
+WARNING: The command completed successfully but no settings of 'medhealthgroup.com.au/MedHealthGroup/UHG/Users/HSN.UHG/Helen Lewies' have been modified.
+Primary SMTP address changed to: helen.lewies@hsn.uhg.com.au
+WARNING: The command completed successfully but no settings of 'medhealthgroup.com.au/MedHealthGroup/UHG/Users/HSN.UHG/Stacey Chadwick' have been modified.
+Primary SMTP address changed to: stacey.chadwick@hsn.uhg.com.au
+WARNING: The command completed successfully but no settings of 'medhealthgroup.com.au/MedHealthGroup/UHG/Users/HSN.UHG/Megan Townsend' have been modified.
+Primary SMTP address changed to: megan.townsend@hsn.uhg.com.au
+Primary SMTP address changed to: helen.dennis@hsn.uhg.com.au
+Primary SMTP address changed to: dianne.eylward@hsn.uhg.com.au
+Primary SMTP address changed to: jessica.cowell@hsn.uhg.com.au
+Primary SMTP address changed to: soonaina.williams@hsn.uhg.com.au
+Cannot process argument transformation on parameter 'PrimarySmtpAddress'. Cannot convert value "mary anne.cairns@hsn.uhg.com.au" to type
+"Microsoft.Exchange.Data.SmtpAddress". Error: "The email address "mary anne.cairns@hsn.uhg.com.au" isn't correct. Please use this format: user name, the @ sign,
+followed by the domain name. For example, tonysmith@contoso.com or tony.smith@contoso.com."
+    + CategoryInfo          : InvalidData: (:) [Set-RemoteMailbox], ParameterBindin...mationException
+    + FullyQualifiedErrorId : ParameterArgumentTransformationError,Set-RemoteMailbox
+    + PSComputerName        : aeprdexc01.medhealthgroup.com.au
+
+Primary SMTP address changed to: mary anne.cairns@hsn.uhg.com.au
+Primary SMTP address changed to: michelle.laing@hsn.uhg.com.au
+Primary SMTP address changed to: andrew.admin@hsn.uhg.com.au
+Primary SMTP address changed to: tiffany.schlaadt@hsn.uhg.com.au
+Primary SMTP address changed to: sherene.rattu@hsn.uhg.com.au
+Primary SMTP address changed to: victor.agada@hsn.uhg.com.au
+Primary SMTP address changed to: debbie.kitto@hsn.uhg.com.au
+Primary SMTP address changed to: jacqui.munro@hsn.uhg.com.au
+Cannot process argument transformation on parameter 'PrimarySmtpAddress'. Cannot convert value "tania.de campo@hsn.uhg.com.au" to type
+"Microsoft.Exchange.Data.SmtpAddress". Error: "The email address "tania.de campo@hsn.uhg.com.au" isn't correct. Please use this format: user name, the @ sign, followed
+by the domain name. For example, tonysmith@contoso.com or tony.smith@contoso.com."
+    + CategoryInfo          : InvalidData: (:) [Set-RemoteMailbox], ParameterBindin...mationException
+    + FullyQualifiedErrorId : ParameterArgumentTransformationError,Set-RemoteMailbox
+    + PSComputerName        : aeprdexc01.medhealthgroup.com.au
+
+Primary SMTP address changed to: tania.de campo@hsn.uhg.com.au
+Primary SMTP address changed to: vivien.triz@hsn.uhg.com.au
+Primary SMTP address changed to: theresa.stevens@hsn.uhg.com.au
+Primary SMTP address changed to: pamela.whitehead@hsn.uhg.com.au
+Primary SMTP address changed to: sheila.tanchoco@hsn.uhg.com.au
+Primary SMTP address changed to: renee.manno@hsn.uhg.com.au
+Primary SMTP address changed to: di.mcmath@hsn.uhg.com.au
+Primary SMTP address changed to: karina.spinka@hsn.uhg.com.au
+Primary SMTP address changed to: natasa.cottee@hsn.uhg.com.au
+Primary SMTP address changed to: kathryn.pruul@hsn.uhg.com.au
+Primary SMTP address changed to: joanne.blood@hsn.uhg.com.au
+Primary SMTP address changed to: tamara.turley@hsn.uhg.com.au
+Primary SMTP address changed to: courtney.rayment@hsn.uhg.com.au
+Primary SMTP address changed to: lauren.middleton@hsn.uhg.com.au
+Primary SMTP address changed to: maree.mcgregor@hsn.uhg.com.au
+Primary SMTP address changed to: melinda.bell@hsn.uhg.com.au
+Primary SMTP address changed to: sandy.janssens@hsn.uhg.com.au
+Primary SMTP address changed to: kimberley.fraser@hsn.uhg.com.au
+Primary SMTP address changed to: ryan.watson@hsn.uhg.com.au
+Primary SMTP address changed to: thomas.mathew@hsn.uhg.com.au
+Primary SMTP address changed to: faye.greenwood@hsn.uhg.com.au
+Primary SMTP address changed to: shannan.gamble@hsn.uhg.com.au
+Primary SMTP address changed to: sherin.matthew@hsn.uhg.com.au
+Primary SMTP address changed to: alisha.shahi@hsn.uhg.com.au
+Primary SMTP address changed to: test.b2b@hsn.uhg.com.au
+Primary SMTP address changed to: sharon.anderson@hsn.uhg.com.au
+Primary SMTP address changed to: jennifer.bengtson@hsn.uhg.com.au
+WARNING: The command completed successfully but no settings of 'medhealthgroup.com.au/MedHealthGroup/UHG/Users/HSN.UHG/Test Holden' have been modified.
+Primary SMTP address changed to: test.holden@hsn.uhg.com.au
+Primary SMTP address changed to: welle.young@hsn.uhg.com.au
+Primary SMTP address changed to: tracey.youngman@hsn.uhg.com.au
+Primary SMTP address changed to: jacob.mikhail@hsn.uhg.com.au
+Primary SMTP address changed to: cherif.mikhail@hsn.uhg.com.au
+Primary SMTP address changed to: gretel.duke@hsn.uhg.com.au
+Primary SMTP address changed to: gaynor.robinson@hsn.uhg.com.au
+Primary SMTP address changed to: sharyn.shiel@hsn.uhg.com.au
+Primary SMTP address changed to: eldhose.varkey@hsn.uhg.com.au
+Primary SMTP address changed to: jamie.kelly@hsn.uhg.com.au
+Primary SMTP address changed to: Qasim.Mehmood@hsn.uhg.com.au
+Primary SMTP address changed to: natasha.skoric@hsn.uhg.com.au
+Primary SMTP address changed to: robyn.darley@hsn.uhg.com.au
+Primary SMTP address changed to: mitch.admin@hsn.uhg.com.au
+Primary SMTP address changed to: susan.hancock@hsn.uhg.com.au
+Primary SMTP address changed to: michelle.joyce@hsn.uhg.com.au
+Primary SMTP address changed to: michelle.betts@hsn.uhg.com.au
+Primary SMTP address changed to: mandy.black@hsn.uhg.com.au
+Primary SMTP address changed to: janette.degonzalez@hsn.uhg.com.au
+Primary SMTP address changed to: natasha.thomson@hsn.uhg.com.au
+Primary SMTP address changed to: tam.nguyen@hsn.uhg.com.au
+Primary SMTP address changed to: sylvia.borg@hsn.uhg.com.au
+WARNING: The command completed successfully but no settings of 'medhealthgroup.com.au/MedHealthGroup/UHG/Users/HSN.UHG/Stacey Cucca' have been modified.
+Primary SMTP address changed to: stacey.cucca@hsn.uhg.com.au
+Primary SMTP address changed to: chris.roodenrys@hsn.uhg.com.au
+Primary SMTP address changed to: natalie.darwin@hsn.uhg.com.au
+Primary SMTP address changed to: stephen.spice@hsn.uhg.com.au
+Primary SMTP address changed to: jocelyn.mellors@hsn.uhg.com.au
+Primary SMTP address changed to: sue.wearne@hsn.uhg.com.au
+Primary SMTP address changed to: mary.gesmundo@hsn.uhg.com.au
+The operation couldn't be performed because object 'b.schloss@uhg.au' couldn't be found on 'aeprddc01.medhealthgroup.com.au'.
+    + CategoryInfo          : NotSpecified: (:) [Set-RemoteMailbox], ManagementObjectNotFoundException
+    + FullyQualifiedErrorId : [Server=aeprdexc01,RequestId=e1fb01ac-099e-4fab-9fa2-9172cb4ad10f,TimeStamp=27/02/2025 10:24:32 PM] [FailureCategory=Cmdlet-ManagementObje
+   ctNotFoundException] CB1BB7FB,Microsoft.Exchange.Management.RecipientTasks.SetRemoteMailbox
+    + PSComputerName        : aeprdexc01.medhealthgroup.com.au
+
+Primary SMTP address changed to: b.schloss@hsn.uhg.com.au
+The operation couldn't be performed because object 'a.nixon@uhg.au' couldn't be found on 'aeprddc01.medhealthgroup.com.au'.
+    + CategoryInfo          : NotSpecified: (:) [Set-RemoteMailbox], ManagementObjectNotFoundException
+    + FullyQualifiedErrorId : [Server=aeprdexc01,RequestId=e1fb01ac-099e-4fab-9fa2-9172cb4ad10f,TimeStamp=27/02/2025 10:24:32 PM] [FailureCategory=Cmdlet-ManagementObje
+   ctNotFoundException] D1AE5B39,Microsoft.Exchange.Management.RecipientTasks.SetRemoteMailbox
+    + PSComputerName        : aeprdexc01.medhealthgroup.com.au
+
+Primary SMTP address changed to: a.nixon@hsn.uhg.com.au
+Primary SMTP address changed to: mitch.dufftest@hsn.uhg.com.au
+The operation couldn't be performed because object 'security.user.hsnuhg@uhg.au' couldn't be found on 'aeprddc01.medhealthgroup.com.au'.
+    + CategoryInfo          : NotSpecified: (:) [Set-RemoteMailbox], ManagementObjectNotFoundException
+    + FullyQualifiedErrorId : [Server=aeprdexc01,RequestId=e1fb01ac-099e-4fab-9fa2-9172cb4ad10f,TimeStamp=27/02/2025 10:24:32 PM] [FailureCategory=Cmdlet-ManagementObje
+   ctNotFoundException] 4BEDA332,Microsoft.Exchange.Management.RecipientTasks.SetRemoteMailbox
+    + PSComputerName        : aeprdexc01.medhealthgroup.com.au
+
+Primary SMTP address changed to: security.user.hsnuhg@hsn.uhg.com.au
+Primary SMTP address changed to: louise.suico@uhg.au
+Primary SMTP address changed to: robyn.laver@uhg.au
+WARNING: The command completed successfully but no settings of 'medhealthgroup.com.au/MedHealthGroup/UHG/Users/HSN.UHG/Beata Molicka' have been modified.
+Primary SMTP address changed to: beata.molicka@hsn.uhg.com.au
+[PS] C:\Windows\system32>
+[PS] C:\Windows\system32>
+
+
+
+
+
+
+Update Users - done
+Test Bittitan - Waiting for results 
+New Users - done some errors 
+Finalise Migration Users - done 
+
+
+Please see account details for Bernard Santos
+	Fullname: Bernard Santos
+	Username: bernard.santos
+	Password: #3rAsm6r#k
+	Email: bernard.santos@uhg.au
+	Telephone: 
+
+
+-----------------------------------
+
+
+Please see account details for Franchesca Salamat
+	Fullname: Franchesca Salamat
+	Username: franchesca.salamat
+	Password: =N7R9Lt8FC
+	Email: franchesca.salamat@uhg.au
+	Telephone: 
+
+
+-----------------------------------
+
+
+ got through all others breaking automation 
+ 
+ Turn off MFA by enabling per user then disabling security defaults 
+ might need impersonation mode
+ 
+ 
+ 
+ post migration test
+ Fix mobile numbers leading 0 and spaces
+ Create last few users by hand 
+ SMTP addresses 
+ 
+ 
+ 
+ Message Properties
+From (Envelope)
+aforster@medhealth.com.au
+From (Header)
+stefan.balthazaar@uhg.au
+To
+bernard.santos@uhghsn.com.au
+Subject
+UPCOMING MIRATION: Your new account details & onboarding instructions
+Transmission Size (Bytes)
+574250
+Routing
+Inbound
+Held Since
+Wed, 05 Mar 2025 - 13:03:36
+Held Reason
+DNS Authentication: DMARC Fail
+Held Information
+
+DNS Authentication: DMARC Fail (SPF: ALLOW / DKIM: ALLOW)
+
+
+
+# Define the path to the CSV file
+$csvPath = "C:\path\to\your\csvfile.csv"
+
+# Import the CSV file
+$csvData = Import-Csv -Path $csvPath
+
+# Loop through each row in the CSV file
+foreach ($row in $csvData) {
+    $user = $row.Column1
+    $forwardAddress = $row.Column2
+
+    # Set up the automatic forward for each user
+    # Assuming you have Exchange Online and using the Set-Mailbox cmdlet for forwarding
+    try {
+        Write-Host "Setting up forwarding for user: $user to $forwardAddress"
+
+        # Set the forwarding address (you might need Exchange Online management module or Exchange on-prem management)
+        Set-Mailbox -Identity $user -ForwardingSmtpAddress $forwardAddress -DeliverToMailboxAndForward $true
+        
+        Write-Host "Forwarding setup successfully for $user"
+    }
+    catch {
+        Write-Host "Error setting up forwarding for $user: $_"
+    }
+}
+
+
+
+ToDo Fix Mobile Numbers
+
+
+
+Disable accoutns from last migration batch 
+Melinda touch base with 
+
+Sarah Smith - contact
+
+Powershell for forwarding 
+
+
+
+Import-Module ExchangeOnlineManagement
+$UserCredential = Get-Credential
+Connect-ExchangeOnline 
+
+$excelFilePath = "C:\Users\adm.harry.goodwin\Downloads\userspt3.csv"
+$spreadsheet = Import-Excel -Path $excelFilePath
+
+
+foreach ($row in $spreadsheet) {
+    $sourceAddress = $row.sourceAddress
+    $destinationAddress = $row.DestinationAddress
+    
+
+    if ($sourceAddress -and $destinationAddress) {
+        Write-Host "Setting forward from $sourceAddress to $destinationAddress"
+
+        Set-Mailbox -Identity $sourceAddress -ForwardingSMTPAddress $destinationAddress -DeliverToMailboxAndForward $true
+    }
+    else {
+        Write-Warning "Skipping row with missing source or destination address: $($row)"
+    }
+}
+
+# Disconnect from Exchange Online
+Disconnect-ExchangeOnline -Confirm:$false
+Write-Host "External forwards created successfully."
+
+How to access medibridge 
+a little more user friendly 
+no mention of having to go to MHG login at the begging
+a bit more of an intro to MHG 
+
+
+michellejoyce71@gmail.com
+
+hgoodwin.admin@uhgcomau.onmicrosoft.com
+
+
+<#
+==##%@@@@@@@%@%@%@@%%%##%%#+*+++++++++-:--::::::::---=++++++**+*%%#%##%#@%@%@@%%%%@%%@+-==*##@
++--:+#%#@%@@%@@@%%#%%*+#+++%##++*%#++++::::::::::::-+++++++++*%#%*%#*%@%%%@@%@%@%@%@@===*@%@%%
+%#*#****++*#%@%%%%%%%%%%%+*#*+++*++#+++++-=+--:-:-++++++++%+%%%%*%%%%%%%%@@%@@%%###+-:+#@%@@%@
+%%+%#%%%@**++###@%%%@%%#%%%@*+*%%+++++++++-=-+:-:+++++=+++#+**%%%#%@%%@%%%#+++=----::+%@@%%%%%
+%#%%++%##%%%+++==+#%%%%%%%%%%%@%**%++*#*+++=:+:-++++++++*%%%%%%@%%@@%@@%=:::::::-::=:=+++++**#
+:===++=::===-=:::=:+*@%@@%%%%@@%%%%%*%%+++=-+=:++++++%%*%%%@%%#%%%%%%%%*++==++=--=+=++++%*++*%
++++#%%#%%%%%+#*=++%%%%%++++++=+%#%%%%@%%*++=++:+++#*%%*%%%%+=:++-+**%%%%#+++%%%@%%*@@%@@%@%%%%
+%%%%%#%%#++%%%#*+++%%#*#%+=-::-+*#%#%%%%*++===-++%*%%%%%%++++==++%%%%%#****%%%#+*%#@%@%@%%#*%%
+%%%%%%%%%%%%+###+++=++###%#%%*%%***+%%+%#%*++=+*+#*+%@*#=*=+%#%%%####*+++**%%%*%%%%%%%**%@@%%%
+*#*%%#%#%%%#%%+**++++-++*+++##%#+++++%##+#%+=:+%+=++++#+++=#*##*-+++++++*#%#%@%%%%%%@%#%*#%#%*
+#%#%%*@%%%%%%%###*+++==++=+==#+++=+++#+=+#%++++%+++=+-+-++-=++=+++++=++++*%*%@%%%*#*%##%###+#%
+%**%#%%*##%##%%#%+*++=--=:::=:==-++#=++-###++:+%+=#++-+==+---+==-=+*==+*#%%#@%#%###%###%%%@@%@
+%%%%#%@%*%%#%%##@##++=+-=---=-===+=+==+=###+==+%#=#=+=+-==:-:==:-=+-=#####%***#**=****%%#%@%%%
+%%*%####%#%##%**%%#=+++:=+--==:=+-++++*=*##*+=+##=###++=++:---+--=++#=###@%#####@#*%%%%%*##%%%
+#%#@%#%#%%%*%%##%%*#%#+=+-=-=-=-+++++***#*#*+=####%*###+++=+---+===*####*@%@%@##%#%%%+#%#%@%##
+%*#@*#%%%*%%%@#*@%*#%##+=-+=+=+==+++#*+#*#**==###=%*###+*++++++=+=#*##%#%@@%%%%#%%#%%#%%%#%*#%
+%#%%*%@%+@%*%%%#@%#%%#**#=++=-+=++=+++#*****+-###*#**=*-+++++===+=*#*#@#%#%*%%%%%##%%*%%#%%%+#
+%*%%%%###*%+#%#%%%+%@##%#*+==++==+===##%##*#+=#*#*@#*+#=+++++#=#*#*%*#%*%%*%%%*#%#*#%%%%**@#%@
+%=*#*%@#+%%%%%%%*%#%@%*##%**+++==++=*+%+++*++:=##-%*#%+=+===*+%***@%*#%#@@@%%#+#%**###**##%%%#
+%##%*%%#+%%*%%%%%%%%@%#@*#*#*#+++===+#*###=++:+=#=**#*--===++*#**#@@*#@@*@%%#%##%#%#%+*%###%#*
+%%#@%#%#*%@*%@#%@%%%%%#@***###*====-++**%#=+-:=+#*@#*+-+=+=+**#*##*###@##%@*##%%#%%%%%%%%%%##%
+@%@%%%%#*@%#*%%%@%%%%###%%######+++++++=*@#@#**%*%#++++=++*%%**#%##%*%#%%*%*%%#@%%%#####%#****
++=++=+##%####+==++++++++##@%#*%**+=+=-=++#@@@@@%***-+=-+++###%###+=+==+++=+=++====:-+++-===:=:
+####*%@%%%%%*##+=++++=%**%@#%##*%*#*#==+==+##+#+++++###%#%%%%*%#*#%@%%@%#@@*++##@%#**+##%*%*#%
+%+*@**%%%%%%%%%%%%#%%@@@**%#++%#*+##%##%%@#@%#%@%%%@#@%*@%#*##**===*#%%%#%%#%#+%####%+%%%%%%%%
+@%%%*%@%%%%%%@@###%+#+=+----++#@#%#%@%+%%##%%#%%*%%####@%%##%+%#%%+##++++%%#@@#*@%###%###*@%%*
+%%%%%*###%*#++=+==++####%#@%%%##%@##%#+#==:::=::::==#@@+%%%*@*%%%%#@%*#++-:-=*#%*%#%@#%%**+#*%
+%%+==++=++++#*###%#%%%%@%%@%#%@###%%#***@==--:-:==*%*##*%@%%##*#%**%%%@%%@*+=+==+##%%#%@#%%#*+
++++*#*%#*@%%%@%%@%*@%%%@%%%*#@%*#%%**%*%%#%%##%%#*%#####%#*%%%%*##%%%%@%%@%**%%*%*+==++*+++-::
+=+%@#%@%#@@%%@%%%%%%%%%@%%%%%%@***=*%%*#*#%%%*#%**%#*%%%*+-+@%%@%*@%##%#@%@#%%#%%@%%@++:--:=+%
+*%%@%#%%%@@%%%%%#%%@@*#%#%@@%%%%#+#+%%%%*#+#**##***##@@#%#+:+#%@%%%%%%@#**@%%%%%%%%%%*%@%@@@%#
+
+					"...Look at you Hacker, A pathetic creature of meat and bone
+						Panting and sweating as you run through my corridors.
+								 How can you challenge a perfect,
+										immortal machine..."
+#>
+# Tennant connection credentials 
+$sourceTenant = "UHG.com.au"
+$targetTenant = "medhealth.com.au"
+
+# get credentials
+$uhgUserCredential = Get-Credential -Message "Enter UHG Admin Credentials"
+$medHealthUserCredential = Get-Credential -Message "Enter MHG Credentials"
+
+# Connect to the UHG Exo tenant
+Write-Host "Connecting to UHG..."  
+$sourceSession = Connect-ExchangeOnline -UserPrincipalName $uhgUserCredential.UserName -Password $uhgUserCredential.GetNetworkCredential().Password -ShowProgress $true
+if ($sourceSession) {
+    Write-Host "Connected to UHG"  
+} else {
+    Write-Host "Failed to connect to UHG"  
+    exit
+}
+# Connect to the MHG EXO tenant
+Write-Host "Connecting to MHG..."  
+$targetSession = Connect-ExchangeOnline -UserPrincipalName $medHealthUserCredential.UserName -Password $medHealthUserCredential.GetNetworkCredential().Password -ShowProgress $true
+if ($targetSession) {
+    Write-Host "Connected to MHG"  
+} else {
+    Write-Host "Failed to connect to MHG"  
+    exit
+}
+
+# Get the list of users from the UHG
+Write-Host "Retrieving user aliases from UHG..."  
+$UHGUsers = Get-Mailbox -ResultSize Unlimited
+
+foreach ($UHGUser in $UHGUsers) {
+    Write-Host "Processing user: $($UHGUser.UserPrincipalName)"  
+
+    # Get all aliases (proxy addresses) for the user from the UHG
+    $sourceAliases = $UHGUser.EmailAddresses | Where-Object { $_ -like "smtp:*" }
+
+    # Get the corresponding user in the MHG
+    $MHGUser = Get-Mailbox -Identity $UHGUser.UserPrincipalName -ErrorAction SilentlyContinue
+
+    if ($MHGUser) {
+        Write-Host "User $($UHGUser.UserPrincipalName) found in MHG."  
+        
+        # Add each alias to the corresponding user in the MHG
+        foreach ($alias in $sourceAliases) {
+            # Ensure that the alias is not already added to the target user
+            if ($MHGUser.EmailAddresses -notcontains $alias) {
+                Write-Host "Adding alias $alias to user $($MHGUser.UserPrincipalName)"  
+                Set-Mailbox -Identity $MHGUser.UserPrincipalName -EmailAddresses @{add=$alias}
+            } else {
+                Write-Host "Alias $alias already exists for user $($MHGUser.UserPrincipalName)"  
+            }
+        }
+    } else {
+        Write-Host "User $($UHGUser.UserPrincipalName) not found in MHG." 
+    }
+}
+
+Write-Host "Transfer completed."  
+
+
+
+
+
+
+$oldDomains = @("uhg.com.au", "medebridge.com.au")
+$newDomain = "unifiedhealthcaregroup.com.au"
+
+
+$recipients = Get-Recipient -RecipientTypeDetails UserMailbox,SharedMailbox,MailUser,MailContact -ResultSize Unlimited
+
+foreach ($recipient in $recipients) {
+    $proxyAddresses = $recipient.EmailAddresses
+    $updated = $false
+
+    foreach ($proxy in $proxyAddresses) {
+        if ($proxy.PrefixString -eq "SMTP" -or $proxy.PrefixString -eq "smtp") {
+            $currentAddress = $proxy.AddressString
+
+            foreach ($oldDomain in $oldDomains) {
+                if ($currentAddress -match "@$oldDomain$") {
+                    $newAddress = $currentAddress -replace "@$oldDomain$", "@$newDomain"
+
+                    Write-Host "Updating $currentAddress to $newAddress for $($recipient.DisplayName)" -ForegroundColor Green
+                    $proxyAddresses.Remove($proxy)
+                    $proxyAddresses.Add("smtp:$newAddress")
+                    $updated = $true
+                }
+            }
+        }
+    }
+
+    if ($updated) {
+        Set-Mailbox $recipient.Identity -EmailAddresses $proxyAddresses
+        Write-Host "Updated aliases for $($recipient.DisplayName)." -ForegroundColor Cyan
+    }
+}
+
+
+
+$users = Import-Csv -Path "C:\Users\adm.harry.goodwin\Downloads\UsersNames.csv"
+
+if (-not (Get-PSSnapin -Name Microsoft.Exchange.Management.PowerShell.SnapIn -ErrorAction SilentlyContinue)) {
+    Add-PSSnapin Microsoft.Exchange.Management.PowerShell.SnapIn
+}
+
+
+foreach ($user in $users) {
+    $primarySMTP = $user.MHGSMTP
+    $secondarySMTP = $user.OriginSMTP
+    
+    if ($primarySMTP -and $secondarySMTP) {
+        $mailbox = Get-RemoteMailbox -Identity $primarySMTP -ErrorAction SilentlyContinue
+        
+        if ($mailbox) {
+            $existingEmails = $mailbox.EmailAddresses
+            $newAlias = "smtp:$secondarySMTP"
+
+            if ($existingEmails -notcontains $newAlias) {
+                $updatedEmailAddresses = $existingEmails + $newAlias
+                Set-RemoteMailbox -Identity $primarySMTP -EmailAddresses $updatedEmailAddresses
+                Write-Host "Added $secondarySMTP to $primarySMTP"
+            } else {
+                Write-Host "$secondarySMTP already exists for $primarySMTP"
+            }
+
+            Start-Sleep -Seconds 5
+        } else {
+            Write-Host "Mailbox not found for $primarySMTP"
+        }
+    } else {
+        Write-Host "Invalid data for $primarySMTP"
+    }
+}
+
+
+
+
+
+
+Connect-ExchangeOnline 
+
+# Get all mailboxes and their aliases
+$users = Get-Mailbox -ResultSize Unlimited | Select-Object DisplayName, UserPrincipalName, @{Name='Aliases';Expression={$_.EmailAddresses -match '^smtp:' -replace '^smtp:'}}
+
+# Export to CSV
+$users | Export-Csv -Path "C:\Users\adm.harry.goodwin\Downloads\Aliases.csv" -NoTypeInformation -Encoding UTF8
+
+
+
+
+# Define the path to the CSV file
+$csvPath = "C:\temp\Alias Rewrite.csv"
+
+# Import the CSV file
+$aliases = Import-Csv -Path $csvPath
+
+
+# Loop through each row in the CSV file
+foreach ($row in $aliases) {
+    # Extract the user's identity and email alias
+    $userIdentity = $row.'MHG Identity'
+    $alias = $row.EmailAddress -replace '^smtp:', '' # Remove 'smtp:' prefix
+
+    try {
+        # Get the current email addresses for the mailbox
+        $mailbox = Get-RemoteMailbox -Identity $userIdentity
+        $currentAddresses = $mailbox.EmailAddresses
+
+        # Check if the alias already exists
+        if ($currentAddresses -contains "smtp:$alias") {
+            Write-Host "Alias $alias already exists for $userIdentity" -ForegroundColor Yellow
+            continue
+        }
+
+        # Add the new alias to the existing list of email addresses
+        $updatedAddresses = $currentAddresses + "smtp:$alias"
+
+        # Update the mailbox with the new list of email addresses
+        Set-RemoteMailBox -Identity $userIdentity -EmailAddresses $updatedAddresses
+
+        Write-Host "Successfully added alias $alias to $userIdentity" -ForegroundColor Green
+    } catch {
+        Write-Host "Failed to add alias $alias to $userIdentity. Error: $_" -ForegroundColor Red
+    }
+}
+
+
+$OU = "OU=HSN.UHG,OU=Users,OU=UHG,OU=MedHealthGroup,DC=medhealthgroup,DC=com,DC=au"
+$Users = Get-ADUser -Filter * -SearchBase $OU
+foreach ($user in $Users) {
+$test = Get-ADUser -Identity $user
+$test = $test.userPrincipalName
+Set-ADUser -Identity $user -EmailAddress $test
+Get-Mailbox -Identity $test
+}
+Get-ADUser -Verbose mitch.dufftest@hsn.uhg.com.au
+
+
+
+
+
+$OU = "OU=HSN.UHG,OU=Users,OU=UHG,OU=MedHealthGroup,DC=medhealthgroup,DC=com,DC=au"
+$Users = Get-ADUser -Filter * -SearchBase $OU
+foreach ($user in $users){
+    set-remotemailbox -identity $user.userprincipalname -primarysmtpaddress $user.userprincipalname
+
+}
+
+
+
+
+
+
+# Define Variables
+$OU = "OU=HSN.UHG,OU=Users,OU=UHG,OU=MedHealthGroup,DC=medhealthgroup,DC=com,DC=au"   # Change this to your target OU
+$OldDomain = "uhg.au"             # Existing domain to replace
+$NewDomain = "hsn.uhg.com.au"             # New domain for email addresses
+
+# Get all users from the specified OU
+$Users = Get-ADUser -Filter * -SearchBase $OU -Properties mail, proxyAddresses
+
+foreach ($User in $Users) {
+   $ToBe = $user.mail
+   $replaceDomain = "hsn.uhg.com.au"
+   $modifiedSMTP = $ToBe -replace "@.*$", "@uhg.au"
+      # Define the user and new primary SMTP address
+    $UserPrincipalName = $modifiedSMTP
+    $NewPrimarySMTP = $user.mail
+
+    Set-RemoteMailbox -Identity $UserPrincipalName -Primarysmtpaddress $NewPrimarySMTP -emailaddresspolicyenabled $false
+
+    Write-Host "Primary SMTP address changed to: $NewPrimarySMTP" -ForegroundColor Green
+
+
+   }
+
+
+
+
+
+
+
+
+
+
+       
+    # Get current mailbox details
+    $Mailbox = Get-RemoteMailbox -Identity $UserPrincipalName
+
+    # Add new Primary SMTP and retain existing aliases
+    $EmailAddresses = $Mailbox.EmailAddresses | ForEach-Object {
+        if ($_ -match "SMTP:(.*)") { "smtp:$($_.Substring(5))" } else { $_ }
+    }
+
+    # Add the new Primary SMTP (uppercase 'SMTP:')
+    $EmailAddresses += "SMTP:$NewPrimarySMTP"
+
+    # Remove duplicates and update the mailbox
+    $EmailAddresses = $EmailAddresses | Select-Object -Unique
+
+
+
+
+
+
+# Connect to Exchange Online
+$UserCredential = Get-Credential
+$Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://outlook.office365.com/powershell-liveid/ -Authentication Basic -AllowRedirection -Credential $UserCredential
+Import-PSSession $Session -DisableNameChecking
+
+# Get all mailboxes where the email address contains 'hsn.uhg.com.au'
+$mailboxes = Get-Mailbox -ResultSize Unlimited | Where-Object { $_.EmailAddresses -like '*hsn.uhg.com.au*' }
+
+# Loop through each mailbox and set the address as the primary SMTP address
+foreach ($mailbox in $mailboxes) {
+    # Get the proxy addresses of the mailbox
+    $proxyAddresses = $mailbox.EmailAddresses
+
+    # Find the email address containing 'hsn.uhg.com.au'
+    $newPrimarySMTP = $proxyAddresses | Where-Object { $_ -like 'smtp:*hsn.uhg.com.au*' }
+
+    # Set the found address as primary SMTP (the primary SMTP is always the one starting with 'SMTP:')
+    if ($newPrimarySMTP) {
+        # Remove the 'smtp:' prefix for correct format and set as primary
+        $primarySMTP = $newPrimarySMTP.ToString().Replace("smtp:", "SMTP:")
+
+        # Set the address as primary SMTP
+        Set-Mailbox -Identity $mailbox.Identity -PrimarySmtpAddress $primarySMTP
+
+        Write-Host "Primary SMTP address for mailbox '$($mailbox.Identity)' set to $primarySMTP"
+    }
+}
+
+
+
+# Get all mailboxes where the email address contains 'hsn.uhg.com.au'
+$mailboxes = Get-Mailbox -ResultSize Unlimited | Where-Object { $_.EmailAddresses -like '*hsn.uhg.com.au*' }
+
+# Loop through each mailbox and set the address as the primary SMTP address
+foreach ($mailbox in $mailboxes) {
+    # Get the proxy addresses of the mailbox
+    $proxyAddresses = $mailbox.EmailAddresses
+    }
+
+
+
+
+
+
+# Import the Excel file
+$excelFilePath = "C:\Users\adm.harry.goodwin\Downloads\userspt4.csv"
+$spreadsheet = Import-Csv -Path $excelFilePath
+
+# Loop through each row and create the external forwarding rule
+foreach ($row in $spreadsheet) {
+    $sourceAddress = $row.sourceAddress
+    $destinationAddress = $row.DestinationAddress
+    
+    # Check if both source and destination addresses are not empty
+    if ($sourceAddress -and $destinationAddress) {
+        Write-Host "Setting forward from $sourceAddress to $destinationAddress"
+        
+        # Enable forwarding from the source to the destination address
+        Set-Mailbox -Identity $sourceAddress -ForwardingSMTPAddress $destinationAddress -DeliverToMailboxAndForward $true
+    }
+    else {
+        Write-Warning "Skipping row with missing source or destination address: $($row)"
+    }
+}
+
+# Disconnect from Exchange Online
+Disconnect-ExchangeOnline -Confirm:$false
+Write-Host "External forwards created successfully."
+
+
+
